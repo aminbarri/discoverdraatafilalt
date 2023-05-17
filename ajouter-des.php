@@ -5,13 +5,27 @@ if((isset($_POST['submit']))){
     $nom_rest = $_POST['title'];
     $ville_rest = $_POST['ville'];
     $province = $_POST['province'];
-    // $image_rest1 = $_FILES['image_rest1'];
-    // $image_rest2 = $_FILES['image_rest2'];
-    // $image_rest3 = $_FILES['image_rest3'];
+     $image_des1 = $_FILES['image1'];
+     $image_des2 = $_FILES['image2'];
+     $image_des3 = $_FILES['image3'];
     $loc_rest = $_POST['location'];
     $description_rest = $_POST['description'];
-    $ins = $pdo->prepare("INSERT INTO destination (nom, ville, province, description,location) VALUES (?,?,?,?,?)");
-    $ins->execute(array($nom_rest,$ville_rest,$province,$description_rest,$loc_rest));
+    function rec_img($image_dest){
+        $valid_extension = array("png","jpeg","jpg");
+        $target_file = "img/destinations/".$image_dest['name'];
+        $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);     
+        $file_extension = strtolower($file_extension);
+        if(in_array($file_extension, $valid_extension)){
+          if(move_uploaded_file($image_dest['tmp_name'],$target_file)){
+            return true;
+          }
+          return false;
+        }
+        return false;
+      }
+      if(rec_img($image_des1) && rec_img($image_des2) && rec_img($image_des3)){
+    $ins = $pdo->prepare("INSERT INTO destination (nom, ville, province, description,location,img1,img2,img3,date_modification) VALUES (?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)");
+    $ins->execute(array($nom_rest,$ville_rest,$province,$description_rest,$loc_rest, $image_des1['name'], $image_des2['name'], $image_des3['name']));}
    
    
     // $test ="INSERT INTO  destination (nom, ville, province, description,location) VALUES
@@ -115,7 +129,7 @@ if((isset($_POST['submit']))){
                     <div class="col-md-12">
                         <h1>Ajouter destination</h1>
                         <hr>
-                        <form action="" method='post'>
+                        <form  method='POST' action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
                           <div class="form-row">
                               <div class="col-md-6">
                                 <label for="title">Title:</label>
@@ -135,18 +149,18 @@ if((isset($_POST['submit']))){
                                 <input type="text" class="form-control" name="province" placeholder="Enter province">
                               </div><div class="col-md-6">
                                 <label for="image1">Image 1:</label>
-                                <input type="file" class="form-control-file" name="image1">
+                                <input type="file" class="form-control-file" name="image1" required>
                               </div>
                             </div>
                             
                             <div class="form-row">
                               <div class="col-md-6">
                                 <label for="image2">Image 2:</label>
-                                <input type="file" class="form-control-file" name="image2">
+                                <input type="file" class="form-control-file" name="image2" required>
                               </div>
                               <div class="col-md-6">
                                 <label for="image3">Image 3:</label>
-                                <input type="file" class="form-control-file" name="image3">
+                                <input type="file" class="form-control-file" name="image3" required>
                               </div>
                             </div>
                             <h5>Location</h5>
