@@ -1,6 +1,40 @@
 
 
 
+<?php 
+include 'connection.php';
+
+if((isset($_POST['submit']))){
+    foreach($_POST as $key => $value){
+        ${$key} = $value;
+    }
+    $image_plat1 = $_FILES['image1'];
+    $image_plat2 = $_FILES['image2'];
+    $image_plat3 = $_FILES['image3'];
+    function rec_img($image_dest){
+        $valid_extension = array("png","jpeg","jpg");
+        $target_file = "img/plats/".$image_dest['name'];
+        $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);     
+        $file_extension = strtolower($file_extension);
+        if(in_array($file_extension, $valid_extension)){
+          if(move_uploaded_file($image_dest['tmp_name'],$target_file)){
+            return true;
+          }
+          return false;
+        }
+        return false;
+      }
+      if (rec_img($image_plat1) && rec_img($image_plat2) && rec_img($image_plat3)) {
+        $ins = $pdo->prepare("INSERT INTO `plat` ( `nom`, `description`, `img1`, `img2`, `img3`,`date-add`) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)");
+        $ins->execute(array($name,$desc , $image_plat1['name'], $image_plat2['name'], $image_plat3['name']));
+    }
+    
+
+
+}
+
+
+?>
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -92,7 +126,7 @@
                 <div class="col-md-12">
                     <h1>Ajouter plat</h1>
                     <hr>
-                    <form>
+                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
                       <div class="form-row">
                           <div class="col-md-6">
                             <label for="title">Nom de plat:</label>
