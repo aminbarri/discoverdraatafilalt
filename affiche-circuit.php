@@ -1,16 +1,3 @@
-<?php
-include 'connection.php';
-
-$sql = 'SELECT * 
-		FROM admin';
- $statement = $pdo->query($sql);
- $publishers = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-
-?>
-
-
-
 
 
 <!doctype html>
@@ -95,51 +82,63 @@ $sql = 'SELECT *
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2>Afficher les administrateurs</h2>
+                            <h2>Afficher les circuit</h2>
                         </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>id-admin</th>
-                                        <th>uresname</th>
-                                        <th>email</th>
-                                        <th>date-ajoute</th>
-                                        <th>modifier</th>
-                                        <th>suprimer</th>
+                                        <th>ville-depart</th>
+                                        <th>ville-arrive</th>
+                                        <th>date-depart	</th>
+                                        <th>heure-depart</th>
+                                        <th>dure</th>
+                                        <th>prix</th>
                                     </tr>
                                 </thead>
-
-                               
                                 <tbody>
-                                    
-                                <?php
-                                
-                                
-                                if ($publishers) {
-                                    // show the publishers
-                                    foreach ($publishers as $publisher) {
-                                        echo '<tr>
-                                        <td>'.$publisher['id_admin'].'</td>
-                                        <td>'.$publisher['username'].'</td>
-                                        <td>'.$publisher['email'].'</td>
-                                        <td>'.$publisher['date-adding'].'</td>
-                                        <td><a href="?id='.$publisher['id_admin'].'"> <i class="bi bi-pencil"></i></a></td>
-                                        <td><a href="?id='.$publisher['id_admin'].'"><i class="bi bi-trash"></i></a></td>
-                                    </tr>';
-                                    }
-                                }
-                                ?>
-                                 
+                                    <tr>
+                                        <td>Tiger Nixon</td>
+                                        <td>System Architect</td>
+                                        <td>Edinburgh</td>
+                                        <td>61</td>
+                                        <td><a href="?"> <i class="bi bi-pencil"></i></a></td>
+                                        <td><a href="?"><i class="bi bi-trash"></i></a></td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <td>Tiger Nixon</td>
+                                        <td>System Architect</td>
+                                        <td>Edinburgh</td>
+                                        <td>61</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                    </tr>
+                                    <tr>
+                                    <td>Tiger Nixon</td>
+                                        <td>System Architect</td>
+                                        <td>Edinburgh</td>
+                                        <td>61</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                    </tr>
+                                    <tr>
+                                    <td>Tiger Nixon</td>
+                                        <td>System Architect</td>
+                                        <td>Edinburgh</td>
+                                        <td>61</td>
+                                        <td>test</td>
+                                        <td>test</td>
+                                    </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                    <th>id-admin</th>
-                                        <th>uresname</th>
-                                        <th>email</th>
-                                        <th>date-ajoute</th>
-                                        <th>modifier</th>
-                                        <th>suprimer</th>
+                                    <th>ville-depart</th>
+                                        <th>ville-arrive</th>
+                                        <th>date-depart	</th>
+                                        <th>heure-depart</th>
+                                        <th>dure</th>
+                                        <th>prix</th>
                                     </tr>
                                 </tfoot>
                             </table>

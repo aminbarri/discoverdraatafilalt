@@ -1,3 +1,15 @@
+<?php
+include 'connection.php';
+
+$sql = 'SELECT * 
+		FROM client';
+ $statement = $pdo->query($sql);
+ $publishers = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+?>
+
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -99,64 +111,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td><i class="bi bi-trash"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>test@testest.com</td>
-                                        <td></td>
-                                        <td><i class="bi bi-trash"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009/01/12</td>
-                                        <td><a href="#"><i class="bi bi-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2012/03/29</td>
-                                        <td>$433,060</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Airi Satou</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>33</td>
-                                        <td>2008/11/28</td>
-                                        <td>$162,700</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Brielle Williamson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>New York</td>
-                                        <td>61</td>
-                                        <td>2012/12/02</td>
-                                        <td>$372,000</td>
-                                    </tr>
-                                   
+                                <?php
+                                
+                                
+                                if ($publishers) {
+                                    // show the publishers
+                                    foreach ($publishers as $publisher) {
+                                        echo '<tr>
+                                        <td>'.$publisher['id_client'].'</td>
+                                        <td>'.$publisher['nom'].'</td>
+                                        <td>'.$publisher['prenom'].'</td>
+                                        <td>'.$publisher['email'].'</td>
+                                        <td>'.$publisher['date-adding'].'</td>
+                                        <td><a href="?id='.$publisher['id_client'].'"><i class="bi bi-trash"></i></a></td>
+                                    </tr>';
+                                    }
+                                }
+                                ?>
+                                 
+
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                    <th>id_client</th>
+                                        <th>nom</th>
+                                        <th>prenom</th>
+                                        <th>email</th>
+                                        <th>date inscription</th>
+                                        <th>suprimer</th>
                                     </tr>
                                 </tfoot>
                             </table>
