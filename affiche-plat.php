@@ -74,8 +74,11 @@ $sql = 'SELECT *
 </head>
 
 <body>
-    
-   <!-- End Header Top Area -->
+ <!-- Start Header Top Area -->
+ <div class="header-top-area">
+    <?php include 'tophead.html' ?>
+</div>
+    <!-- End Header Top Area -->
     <!-- Mobile Menu start -->
     <div class="mobile-menu-area">
     <?php include 'mobile-menu-area.html' ?>

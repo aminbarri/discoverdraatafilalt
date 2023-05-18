@@ -28,7 +28,7 @@ $sql = 'SELECT *
         <!-- Bootstrap CSS
             ============================================ -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+        
         <!-- font awesome CSS
             ============================================ -->
         <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -75,7 +75,11 @@ $sql = 'SELECT *
 
 <body>
     
-   <!-- End Header Top Area -->
+<!-- Start Header Top Area -->
+<div class="header-top-area">
+    <?php include 'tophead.html' ?>
+</div>
+    <!-- End Header Top Area -->
     <!-- Mobile Menu start -->
     <div class="mobile-menu-area">
     <?php include 'mobile-menu-area.html' ?>
