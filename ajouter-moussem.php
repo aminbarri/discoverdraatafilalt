@@ -1,3 +1,42 @@
+
+
+
+
+<?php 
+include 'connection.php';
+
+if((isset($_POST['submit']))){
+    foreach($_POST as $key => $value){
+        ${$key} = $value;
+    }
+    $image_mous1 = $_FILES['image1'];
+    $image_mous2 = $_FILES['image2'];
+    $image_mous3 = $_FILES['image3'];
+    function rec_img($image_dest){
+        $valid_extension = array("png","jpeg","jpg");
+        $target_file = "img/moussem/".$image_dest['name'];
+        $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);     
+        $file_extension = strtolower($file_extension);
+        if(in_array($file_extension, $valid_extension)){
+          if(move_uploaded_file($image_dest['tmp_name'],$target_file)){
+            return true;
+          }
+          return false;
+        }
+        return false;
+      }
+      if (rec_img($image_mous1) && rec_img($image_mous2) && rec_img($image_mous3)) {
+        $ins = $pdo->prepare("INSERT INTO `moussem` ( `nom`, `ville`, `description`, `location`, `date-debut`, `date-fin`, `img1`, `img2`, `img3`,`date-add`) VALUES (?, ?, ?, ?, ?,?,?,?,?, CURRENT_TIMESTAMP)");
+        $ins->execute(array($nom,$ville,$desc,$location,$date_debut,$date_fin , $image_mous1['name'], $image_mous2['name'], $image_mous3['name']));
+    }
+    
+
+
+}
+
+
+?>
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -67,281 +106,19 @@
 
 <body>
     
-    <!-- Start Header Top Area -->
-    <div class="header-top-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="logo-area">
-                        <a href="#"><img src="img/logo/logo.png" alt="" /></a>
-                    </div>
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                    <div class="header-top-menu">
-                        <ul class="nav navbar-nav notika-top-nav">
-                            <li class="nav-item dropdown">
-                        <div class="profile-image" data-toggle="modal" data-target="#profileModal">
-                    <img class="rounded-circle mb-3" src="https://th.bing.com/th/id/R.3c16772dea67b7a3b52183c0652019ec?rik=xj4uxUsY3fyeJg&pid=ImgRaw&r=0" alt="Profile Image">
-                  </div></li>
-                        </ul>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <img src="https://th.bing.com/th/id/R.3c16772dea67b7a3b52183c0652019ec?rik=xj4uxUsY3fyeJg&pid=ImgRaw&r=0" alt="Profile Image" class="rounded-circle mb-3">
-                  
-                  <a href="#" class="btn btn-primary">View Profile</a>
-                  <a href="#" class="btn btn-secondary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div>
-    </div>
+ <!-- Start Header Top Area -->
+ <div class="header-top-area">
+    <?php include 'tophead.html' ?>
+</div>
     <!-- End Header Top Area -->
     <!-- Mobile Menu start -->
     <div class="mobile-menu-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="mobile-menu">
-                        <nav id="dropdown">
-                            <ul class="mobile-menu-nav">
-                                <li><a data-toggle="collapse" data-target="#Charts" href="index.html">Dashboard</a>
-                                   
-                                </li>
-  
-                                <li><a data-toggle="collapse" data-target="#Mon-profile" href="account.html">Mon profile</a>
-                                   
-                                </li>
-                                
-                            
-                                
-                                <li><a data-toggle="collapse" data-target="#demoevent" href="#">Gerer les administrateurs                                </a>
-                                    <ul id="demoevent" class="collapse dropdown-header-top">
-                                        <li><a href="afficheadmin.html">Afficher les administrateurs</a>
-                                        </li>
-                                        <li><a href="ajouter-admin.html">Ajouter un administrateur</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#democrou" href="#">Gerer les clients</a>
-                                    <ul id="democrou" class="collapse dropdown-header-top">
-                                        <li><a href="afficheclient.html">Afficher les clients</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#demolibra" href="#">Circuits</a>
-                                    <ul id="demolibra" class="collapse dropdown-header-top">
-                                        <li><a href="">Afficher les circuits</a>
-                                        </li>
-                                        <li><a href="ajouter-cer.html">Ajouter un circuit</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#demodepart" href="#">Destinations</a>
-                                    <ul id="demodepart" class="collapse dropdown-header-top">
-                                        <li><a href="">Afficher les destinations</a>
-                                        </li>
-                                        <li><a href="ajouter-des.html">Ajouter un destination</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#demo" href="#">Restaurants</a>
-                                    <ul id="demo" class="collapse dropdown-header-top">
-                                        <li><a href="">Afficher les restaurants</a>
-                                        </li>
-                                        <li><a href="ajouter-res.html">Ajouter un restaurant</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">Hotels</a>
-                                    <ul id="Miscellaneousmob" class="collapse dropdown-header-top">
-                                        <li><a href="">Afficher les Hotels</a>
-                                        </li>
-                                        <li><a href="">Ajouter un Hotel</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Spécialité Culinaire</a>
-                                    <ul id="Pagemob" class="collapse dropdown-header-top">
-                                      <li><a href="">Afficher les  plats</a>
-                                      </li>
-                                      <li><a href="">Ajouter un  plat</a>
-                                      </li>
-                                    </ul>
-                                </li>
-                               
-                                
-                                <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Moussems</a>
-                                    <ul id="Pagemob" class="collapse dropdown-header-top">
-                                        <li><a href="">Afficher les  Moussems</a>
-                                        </li>
-                                        <li><a href="">Ajouter un  Moussem</a>
-                                        </li>
-                                   </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Specialite Culinaire  </a>
-                                    <ul id="Pagemob" class="collapse dropdown-header-top">
-                                        <li><a href="">Contact</a>
-                                        </li>
-                                        <li><a href="">Invoice</a>
-                                        </li>
-                                   </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Reservations</a>
-                                    <ul id="Pagemob" class="collapse dropdown-header-top">
-                                        <li><a href="">Les reservations d'hotels</a>
-                                        </li>
-                                        <li><a href="">Les reservations de voyage</a>
-                                        </li>
-                                   </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Messages</a>
-                                    <ul id="Pagemob" class="collapse dropdown-header-top">
-                                        <li><a href="">Gerer les Messages</a>
-                                        </li>
-                                   </ul>
-                                </li>
-                            </ul>
-                            
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <?php include 'mobile-menu-area.html' ?>
     </div>
     <!-- Mobile Menu end -->
     <!-- Main Menu area start-->
     <div class="main-menu-area mg-tb-40">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                        <li class=""><a  href="index.html#Dashboard"><i class="bi bi-grid notika-icon"></i> Dashboard</a>
-                        </li>
-                        <li ><a  href="account.html"><i class="notika-icon bi bi-person"></i> Mon profile</a>
-                        </li>
-                        <li  ><a data-toggle="tab" href="#admin"><i class="notika-icon bi bi-person-add"></i> Gerer les administrateurs  </a>
-                        </li>
-                        <li class=""><a data-toggle="tab" href="#client"><i class="notika-icon bi bi-people"></i> Gerer les clients</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#Circuits"><i class="notika-icon bi bi-circle"></i> Circuits</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#Destinations"><i class="notika-icon bi bi-pin-map "></i> Destinations</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#restaurants"><i class="notika-icon bi bi-egg-fried"></i>Restaurants</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#Hotels"><i class="notika-icon bi bi-building "></i> Hotels</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#artisanats"><i class="notika-icon bi bi-cloud-fog "></i> Spécialité Culinaire</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#Moussems"><i class="notika-icon bi bi-postcard"></i> Moussems</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#Reservations"><i class="notika-icon bi bi-card-checklist"></i>Reservations</a>
-                        </li>
-                        <li><a data-toggle="tab" href="#Messages"><i class="notika-icon bi bi-chat-left-text"></i> Messages</a>
-                        </li>
-                        
-                    </ul>
-                    <div class="tab-content custom-menu-content">
-                        
-                        
-                        <div id="admin" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li class=""><a href="afficheadmin.html">Afficher les administrateurs</a>
-                                </li>
-                                <li><a href="ajouter-admin.html">Ajouter un administrateur</a>
-                                </li>
-                               
-                            </ul>
-                        </div>
-                        <div id="client" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="afficheclient.html">Afficher les clients</a>
-                                </li>
-                                
-                               
-                            </ul>
-                        </div>
-                        <div id="Circuits" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="">Afficher les circuits</a>
-                                </li>
-                                <li><a href="ajouter-cer.html">Ajouter un circuit</a>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div id="Destinations" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="">Afficher les destinations</a>
-                                </li>
-                                <li><a href="ajouter-des.html">Ajouter un destination</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="restaurants" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="">Afficher les restaurants</a>
-                                </li>
-                                <li><a href="ajouter-res.html">Ajouter un restaurant</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="Hotels" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="">Afficher les Hotels</a>
-                                </li>
-                                <li><a href="">Ajouter un Hotel</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="artisanats" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                              <li><a href="">Afficher les  plats</a>
-                              </li>
-                              <li><a href="">Ajouter un  plat</a>
-                              </li>
-                            </ul>
-                        </div>
-                        <div id="Moussems" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="">Afficher les  Moussems</a>
-                                </li>
-                                <li><a href="">Ajouter un  Moussem</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="Reservations" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="">Les reservations d'hotels</a>
-                                </li>
-                                <li><a href="">Les reservations de voyage</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="Messages" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="">Gerer les Messages</a>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <?php include 'main-menu-area.html' ?>
     </div>
     <!-- Main Menu area End-->
     <!-- Start Status area -->
@@ -351,28 +128,40 @@
                 <div class="col-md-12">
                     <h1>Ajouter Moussem</h1>
                     <hr>
-                    <form>
+                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
                       <div class="form-row">
                           <div class="col-md-6">
                             <label for="title">Nom de Moussem:</label>
-                            <input type="text" class="form-control" id="title" placeholder="Enter Moussem">
+                            <input type="text" class="form-control" name="nom" placeholder="Nom de Moussem">
                           </div>
                           <div class="col-md-6">
                             <label for="ville">Ville:</label>
-                            <input type="text" class="form-control" id="ville" placeholder="Enter ville">
+                            <input type="text" class="form-control" name="ville" placeholder="ville de Moussem">
                           </div>
                         </div>
                         
-                        
+                        <div class="form-row">
+                              
+                              <div class="col-md-6">
+                                <label for="province">Date debut:</label>
+                                <input type="date" class="form-control" name="date_debut" >
+                              </div>
+                              <div class="col-md-6">
+                                <label for="province">Date fin:</label>
+                                <input type="date" class="form-control" name='date_fin'>
+                             
+                            </div>
+                            </div>
+              
                         <div class="form-row">
                           
                           <div class="col-md-6">
                             <label for="image1">Image 1:</label>
-                            <input type="file" class="form-control-file" id="image1">
+                            <input type="file" class="form-control-file" name="image1">
                           </div>
                           <div class="col-md-6">
                             <label for="image2">Image 2:</label>
-                            <input type="file" class="form-control-file" id="image2">
+                            <input type="file" class="form-control-file" name="image2">
                           </div>
                         </div>
                         
@@ -380,16 +169,25 @@
                           
                           <div class="col-md-6">
                             <label for="image3">Image 3:</label>
-                            <input type="file" class="form-control-file" id="image3">
+                            <input type="file" class="form-control-file" name="image3">
                           </div>
                          
                         </div>
-                        
+                        <div class="form-row">
+                              
+                              <div class="col-md-12">
+                                <label for="province">location:</label>
+                                <input type="text" class="form-control" name="location" >
+                              </div>
+                              
+                            </div>
                         <h5>Description:</h5>
-                                      <div class="html-editor"></div>
+                                    
+
+                        <textarea name="desc" class="html-editor col-md-12"></textarea>
                      
                       <div class="text-right">
-                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                        <button type="submit" class="btn btn-primary" name='submit'>Ajouter</button>
                         <button type="button" class="btn btn-secondary">Cancel</button>
                       </div>
                       
