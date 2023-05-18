@@ -1,3 +1,14 @@
+<?php
+include 'connection.php';
+
+$sql = 'SELECT * 
+		FROM circuit';
+ $statement = $pdo->query($sql);
+ $publishers = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+?>
+
 
 
 <!doctype html>
@@ -94,42 +105,31 @@
                                         <th>heure-depart</th>
                                         <th>dure</th>
                                         <th>prix</th>
+                                        <th>modifier</th>
+                                        <th>supprimer</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td><a href="?"> <i class="bi bi-pencil"></i></a></td>
-                                        <td><a href="?"><i class="bi bi-trash"></i></a></td>
+                                         
+                                <?php
+                                
+                                
+                                if ($publishers) {
+                                    // show the publishers
+                                    foreach ($publishers as $publisher) {?>
+                                        <tr>
+                                        <td><?php  echo $publisher['ville-depart'] ?></td>
+                                        <td><?php  echo $publisher['ville-arrive'] ?></td>
+                                        <td><?php echo $publisher['date-depart'] ?></td>
+                                        <td><?php echo $publisher['heure-depart'] ?></td>
+                                        <td><?php echo $publisher['dure'] ?></td>
+                                        <td><?php echo $publisher['prix'] ?></td>
+                                        <td><a href="?id=<?php echo $publisher['id-cer'] ?>"> <i class="bi bi-pencil"></i></a></td>
+                                        <td><a href="?id=<?php echo $publisher['id-cer'] ?>"><i class="bi bi-trash"></i></a></td>
                                     </tr>
-                                   
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                    </tr>
-                                    <tr>
-                                    <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                    </tr>
-                                    <tr>
-                                    <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>test</td>
-                                        <td>test</td>
-                                    </tr>
+                                    
+                               <?php }}
+                                ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -139,6 +139,8 @@
                                         <th>heure-depart</th>
                                         <th>dure</th>
                                         <th>prix</th>
+                                        <th>modifier</th>
+                                        <th>supprimer</th>
                                     </tr>
                                 </tfoot>
                             </table>

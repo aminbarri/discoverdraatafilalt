@@ -2,14 +2,12 @@
 include 'connection.php';
 
 $sql = 'SELECT * 
-		FROM admin';
+		FROM moussem';
  $statement = $pdo->query($sql);
  $publishers = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
-
-
 
 
 
@@ -95,51 +93,57 @@ $sql = 'SELECT *
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2>Afficher les administrateurs</h2>
+                            <h2>Afficher les Moussem</h2>
                         </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>id-admin</th>
-                                        <th>uresname</th>
-                                        <th>email</th>
-                                        <th>date-ajoute</th>
+                                        <th>Moussem</th>
+                                        <th>ville</th>
+                                        <th>date debut</th>
+                                        <th>date fin</th>
+                                      
+                                        <th>date modification</th>
+                                   
                                         <th>modifier</th>
-                                        <th>suprimer</th>
+                                        <th>supprimer</th>
                                     </tr>
                                 </thead>
-
-                               
                                 <tbody>
-                                    
+                                         
                                 <?php
                                 
                                 
                                 if ($publishers) {
                                     // show the publishers
                                     foreach ($publishers as $publisher) {?>
-                                        <tr>
-                                        <td><?php  echo $publisher['id_admin'] ?></td>
-                                        <td><?php  echo $publisher['username'] ?></td>
-                                        <td><?php echo $publisher['email'] ?></td>
-                                        <td><?php echo $publisher['date-adding'] ?></td>
-                                        <td><a href="?id=<?php echo$publisher['id_admin'] ?>"> <i class="bi bi-pencil"></i></a></td>
-                                        <td><a href="?id=<?php echo$publisher['id_admin'] ?>"><i class="bi bi-trash"></i></a></td>
+                                    <tr>
+                                        <td><?php  echo $publisher['nom'] ?></td>
+                                        <td><?php  echo $publisher['ville'] ?></td>
+                                        <td><?php  echo $publisher['date-debut'] ?></td>
+                                        <td><?php  echo $publisher['date-fin'] ?></td>
+                                        <td><?php  echo $publisher['date-add'] ?></td>
+                                       
+                                        <td><a href="?id=<?php echo $publisher['id-mous'] ?>"> <i class="bi bi-pencil"></i></a></td>
+                                        <td><a href="?id=<?php echo $publisher['id-mous'] ?>"><i class="bi bi-trash"></i></a></td>
                                     </tr>
                                     
                                <?php }}
                                 ?>
-                                 
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                    <th>id-admin</th>
-                                        <th>uresname</th>
-                                        <th>email</th>
-                                        <th>date-ajoute</th>
+                                    
+                                    <th>Moussem</th>
+                                        <th>ville</th>
+                                        <th>date debut</th>
+                                        <th>date fin</th>
+                                      
+                                        <th>date modification</th>
+                                   
                                         <th>modifier</th>
-                                        <th>suprimer</th>
+                                        <th>supprimer</th>
                                     </tr>
                                 </tfoot>
                             </table>
