@@ -1,17 +1,21 @@
+
 <?php
+ob_start();
 include 'connection.php';
 
-$sql = 'SELECT * 
-		FROM admin';
- $statement = $pdo->query($sql);
- $publishers = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+  @$id_admin = $_GET['modi'];
 
+  $sql = 'SELECT *
+          FROM admin
+          WHERE id_admin = :id_admin';
+  
+  $statement = $pdo->prepare($sql);
+  $statement->bindValue(':id_admin', $id_admin);
+  $statement->execute();
+  
+  $admins = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
-
-
-
 
 <!doctype html>
 <html class="no-js" lang="">
@@ -30,6 +34,7 @@ $sql = 'SELECT *
         <!-- Bootstrap CSS
             ============================================ -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
         <!-- font awesome CSS
             ============================================ -->
@@ -73,11 +78,12 @@ $sql = 'SELECT *
         <!-- modernizr JS
             ============================================ -->
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        
 </head>
 
 <body>
-  <!-- Start Header Top Area -->
-  <div class="header-top-area">
+   <!-- Start Header Top Area -->
+   <div class="header-top-area">
     <?php include 'tophead.html' ?>
 </div>
     <!-- End Header Top Area -->
@@ -95,70 +101,53 @@ $sql = 'SELECT *
     <div class="notika-status-area">
         <div class="container">
             <div class="row">
-            <?php 
-                  if(isset($_GET['success'])){ ?>
-                    <div class="alert alert-success" role="alert">
-                      <?php echo$_GET['success']; ?>
-                    </div>
-                <?php } ?>
-                <?php 
-                  if(isset($_GET['error'])){ ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php echo$_GET['error']; ?>
-                    </div>
-                <?php } ?>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="data-table-list">
-                        <div class="basic-tb-hd">
-                            <h2>Afficher les administrateurs</h2>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>id-admin</th>
-                                        <th>uresname</th>
-                                        <th>email</th>
-                                        <th>date-ajoute</th>
-                                        <th>modifier</th>
-                                        <th>suprimer</th>
-                                    </tr>
-                                </thead>
+                    <div class="ajouter-admin">
+                        <span class="ajouter-text">Ajouter administratuer</span>
+                        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
+                            <div class="row">
+                            <div class="mb-3 col">
+                                <label for="exampleInputname124" class="form-label">Nom</label>
+                                <input type="text" value="<?php echo $admins[0]['nom']; ?>" class="form-control" id="exampleInputname124" name="name">
 
-                               
-                                <tbody>
-                                    
-                                <?php
-                                
-                                
-                                if ($publishers) {
-                                    // show the publishers
-                                    foreach ($publishers as $publisher) {?>
-                                        <tr>
-                                        <td><?php  echo $publisher['id_admin'] ?></td>
-                                        <td><?php  echo $publisher['username'] ?></td>
-                                        <td><?php echo $publisher['email'] ?></td>
-                                        <td><?php echo $publisher['date-adding'] ?></td>
-                                        <td><a href="update-admin.php?modi=<?php echo$publisher['id_admin']?>"> <i class="bi bi-pencil"></i></a></td>
-                                        <td><a href="?id=<?php echo$publisher['id_admin'] ?>"><i class="bi bi-trash"></i></a></td>
-                                    </tr>
-                                    
-                               <?php }}
-                                ?>
-                                 
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                    <th>id-admin</th>
-                                        <th>uresname</th>
-                                        <th>email</th>
-                                        <th>date-ajoute</th>
-                                        <th>modifier</th>
-                                        <th>suprimer</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="exampleInputname124" class="form-label">Prenom</label>
+                                <input type="text" value="<?php echo $admins[0]['prenom']; ?>" class="form-control" id="exampleInputname124" name='sec_name' >
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="mb-3 col">
+                                <label for="exampleInputEmail178" class="form-label">Email address</label>
+                                <input type="email" value='<?php echo $admins[0]['email']; ?>' class="form-control" id="exampleInputEmail178" name='email' aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="exampleInputname124" class="form-label">Nom d'utilisateur</label>
+                                <input type="text" value='<?php echo $admins[0]['username']; ?>' class="form-control" id="exampleInputname124" name='username'>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="mb-3 col">
+                                <label for="exampleInputPassword781" class="form-label">Mot de pass</label>
+                                <input type="password" class="form-control" id="exampleInputPassword781" name='password'>
+                              </div>
+                              <div class="mb-3 col">
+                                <label for="exampleInputPassword471" class="form-label">Confirm mot de pass</label>
+                                <input type="password" class="form-control" id="exampleInputPassword471" name='password'>
+                              </div>
+                            </div>
+                            
+                              <div class="input-group mb-3">
+                                <input type="file" class="form-control" id="" name='img_profile' >
+                                <label class="input-group-text" for="inputGroupFile02">Photo</label>
+                              </div>
+                            <div class="anucon-btn">
+                            <input type="text" name="id" value="<?php echo$admins[0]['id_admin']; ?>" hidden>
+                                <button type="submit" class="btn btn-primary" name='update'>Update</button>
+                              <button type="submit" class="btn btn-primary" name='cancel'>annuler</button>
+                            </div>
+                              
+                        </form>
                     </div>
                 </div>
             </div>
@@ -248,4 +237,50 @@ $sql = 'SELECT *
     
 </body>
 
-</html>
+</html><?php
+    if (isset($_POST['update'])) {
+        $name = $_POST['name'];
+        $sec_name = $_POST['sec_name'];
+        $email = $_POST['email'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $id = $_POST['id'];
+        $photo_admin = $_FILES['img_profile'];
+
+
+        $valid_extension = array("png","jpeg","jpg");
+        $target_file = "img/profile/".$photo_admin['name'];
+        $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);     
+        $file_extension = strtolower($file_extension);
+        $valid_extension = array("png","jpeg","jpg");
+        if(in_array($file_extension, $valid_extension)){
+          if(move_uploaded_file($photo_admin['tmp_name'],$target_file)){
+            $ins = $pdo->prepare("UPDATE admin SET nom=?, prenom=?, email=?, username=?,photoprofile=? ,password=?, `date-adding`=CURRENT_TIMESTAMP WHERE id_admin=$id");
+            $ins->execute(array($name, $sec_name, $email, $username,$photo_admin['name'],md5($password)));
+            if ($ins) {
+                header("Location: afficheadmin.php?success= admin info a été modifiée avec succès");
+                
+            }else{
+
+                header("Location: afficheadmin.php?error= admin info n'a pas été modifiée avec succès!");
+            }
+        }}else{
+
+        
+            $ins = $pdo->prepare("UPDATE admin SET nom=?, prenom=?, email=?, username=?, password=?, `date-adding`=CURRENT_TIMESTAMP WHERE id_admin=$id");
+            $ins->execute(array($name, $sec_name, $email, $username, md5($password)));
+            
+            if ($ins) {
+                header("Location: afficheadmin.php?success=admin info a été modifiée avec succès");
+                
+            }
+            else{
+
+                header("Location: afficheadmin.php?error= admin info n'a pas été modifiée avec succès!");
+            }
+
+        
+    }
+    }
+ob_end_flush();
+?>
