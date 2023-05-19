@@ -269,3 +269,48 @@ $circuit = $statement->fetchAll(PDO::FETCH_ASSOC);
 </body>
 
 </html>
+
+<?php
+    if (isset($_POST['update'])) {
+        foreach($_POST as $key => $value){
+            ${$key} = $value;
+        }
+        $img_cover = $_FILES['image3'];
+
+
+         $valid_extension = array("png","jpeg","jpg");
+         $target_file = "img/cercuit/".$img_cover['name'];
+         $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);     
+         $file_extension = strtolower($file_extension);
+         $valid_extension = array("png","jpeg","jpg");
+         if(in_array($file_extension, $valid_extension)){
+           if(move_uploaded_file($img_cover['tmp_name'],$target_file)){
+             $ins = $pdo->prepare("UPDATE circuit SET `ville-depart`=?,`ville-arrive`=?,`trajet`=?,`date-depart`=?,`heure-depart`=?,`dure`=?,`img`=?,`carte`=?,`prix`=?,`date-res`=?,`date-creation`=CURRENT_TIMESTAMP WHERE  `id-cer`=$id");
+             $ins->execute(array($ville_dpart,$ville_arrive,$trajet,$date_depart,$heure_depart,$dure,$img_cover['name'],$carte_trajet,$prix,$date_reser));
+            if ($ins) {
+                 header("Location: affiche-circuit.php?success=circuit a été modifiée avec succès");
+                
+             }else{
+
+                 header("Location: affiche-circuit.php?error=circuit n'a pas été modifiée avec succès!");
+             }
+         }}else{
+
+        
+            $ins = $pdo->prepare("UPDATE circuit SET `ville-depart`=?,`ville-arrive`=?,`trajet`=?,`date-depart`=?,`heure-depart`=?,`dure`=?,`carte`=?,`prix`=?,`date-res`=?,`date-creation`=CURRENT_TIMESTAMP WHERE  `id-cer`=$id");
+            $ins->execute(array($ville_dpart,$ville_arrive,$trajet,$date_depart,$heure_depart,$dure,$carte_trajet,$prix,$date_reser));
+            
+            if ($ins) {
+                header("Location: affiche-circuit.php?success=circuit info a été modifiée avec succès");
+                
+            }
+            else{
+
+                header("Location: affiche-circuit.php?error= circuit info n'a pas été modifiée avec succès!");
+            }
+
+    }
+    }
+    
+ob_end_flush();
+?>

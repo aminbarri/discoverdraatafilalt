@@ -94,6 +94,18 @@ $sql = 'SELECT *
     <div class="notika-status-area">
         <div class="container">
             <div class="row">
+            <?php 
+                  if(isset($_GET['success'])){ ?>
+                    <div class="alert alert-success" role="alert">
+                      <?php echo$_GET['success']; ?>
+                    </div>
+                <?php } ?>
+                <?php 
+                  if(isset($_GET['error'])){ ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo$_GET['error']; ?>
+                    </div>
+                <?php } ?>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
