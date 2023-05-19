@@ -1,15 +1,21 @@
+
 <?php
+ob_start();
 include 'connection.php';
 
-$sql = 'SELECT * 
-		FROM circuit';
- $statement = $pdo->query($sql);
- $publishers = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+@$id_cer = $_GET['modi'];
 
+$sql = 'SELECT *
+        FROM circuit
+        WHERE `id-cer` = :id_cer';
+
+$statement = $pdo->prepare($sql);
+$statement->bindValue(':id_cer', $id_cer);
+$statement->execute();
+
+$circuit = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
-
 
 <!doctype html>
 <html class="no-js" lang="">
@@ -28,7 +34,7 @@ $sql = 'SELECT *
         <!-- Bootstrap CSS
             ============================================ -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!-- <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
         <!-- font awesome CSS
             ============================================ -->
         <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -70,7 +76,12 @@ $sql = 'SELECT *
         <link rel="stylesheet" href="css/responsive.css">
         <!-- modernizr JS
             ============================================ -->
+
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <!-- summernote CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/summernote/summernote.css">
+        
 </head>
 
 <body>
@@ -95,61 +106,76 @@ $sql = 'SELECT *
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="data-table-list">
-                        <div class="basic-tb-hd">
-                            <h2>Afficher les circuit</h2>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ville-depart</th>
-                                        <th>ville-arrive</th>
-                                        <th>date-depart	</th>
-                                        <th>heure-depart</th>
-                                        <th>dure</th>
-                                        <th>prix</th>
-                                        <th>modifier</th>
-                                        <th>supprimer</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                         
-                                <?php
-                                
-                                
-                                if ($publishers) {
-                                    // show the publishers
-                                    foreach ($publishers as $publisher) {?>
-                                        <tr>
-                                        <td><?php  echo $publisher['ville-depart'] ?></td>
-                                        <td><?php  echo $publisher['ville-arrive'] ?></td>
-                                        <td><?php echo $publisher['date-depart'] ?></td>
-                                        <td><?php echo $publisher['heure-depart'] ?></td>
-                                        <td><?php echo $publisher['dure'] ?></td>
-                                        <td><?php echo $publisher['prix'] ?></td>
-                                        <td><a href="update-circuit.php?modi=<?php echo $publisher['id-cer'] ?>"> <i class="bi bi-pencil"></i></a></td>
-                                        <td><a href="?id=<?php echo $publisher['id-cer'] ?>"><i class="bi bi-trash"></i></a></td>
-                                    </tr>
-                                    
-                               <?php }}
-                                ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                    <th>ville-depart</th>
-                                        <th>ville-arrive</th>
-                                        <th>date-depart	</th>
-                                        <th>heure-depart</th>
-                                        <th>dure</th>
-                                        <th>prix</th>
-                                        <th>modifier</th>
-                                        <th>supprimer</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
+                    <div class="col-md-12">
+                        <h1>Ajouter circuit</h1>
+                        <hr>
+                        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
+                          <div class="form-row">
+                              <div class="col-md-6">
+                                <label for="title">Ville Départ</label>
+                                <input type="text" value="<?php echo $circuit[0]['ville-depart']; ?>"  class="form-control" name="ville_dpart" placeholder="">
+                              </div>
+                              <div class="col-md-6">
+                                <label for="ville">Ville Arrivée</label>
+                                <input type="text" class="form-control" value="<?php echo $circuit[0]['ville-arrive']; ?>" name="ville_arrive" placeholder="">
+                              </div>
+                            </div>
+                            <div class="">
+                                <h5>Trajet</h5>
+                           
+                             <textarea type="text" class="form-control html-editor" value="" name="trajet" placeholder=""><?php echo $circuit[0]['trajet']; ?></textarea>
+                            </div>
+                            
+                      
+                            
+                            <div class="form-row">
+                              
+                              <div class="col-md-6">
+                                <label for="province">Date depart:</label>
+                                <input type="date" class="form-control" name="date_depart" value='<?php echo $circuit[0]['date-depart']; ?>'>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="province">heure depart:</label>
+                                <input type="time" class="form-control "value="<?php echo $circuit[0]['heure-depart']; ?>" name='heure_depart'>
+                             
+                            </div>
+                            </div>
+              
+                            
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <label for="province">Dure:</label>
+                                <input type="number" class="form-control" value="<?php echo $circuit[0]['dure']; ?>" name='dure'>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="image3">Image cover:</label>
+                                <input type="file" class="form-control-file" value="<?php echo $circuit[0]['img']; ?>" name="image3">
+                              </div>
+                            </div>
+                            <div class="form-row"> <div class="col-md-12">
+                              <label for="province">Carte trajet:</label>
+                              <input type="text" class="form-control" value="<?php echo $circuit[0]['carte']; ?>" name="carte_trajet" >
+                            </div>
+                          </div>
+                           
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <label for="province">Prix:</label>
+                                <input type="number" class="form-control" name="prix" value="<?php echo $circuit[0]['prix']; ?>">
+                              </div>
+                              <div class="col-md-6">
+                                <label for="province">Date de reservation:</label>
+                                <input type="date" class="form-control" name="date_reser" value="<?php echo $circuit[0]['date-res']; ?>" >
+                              </div>
+                            </div>
+                          <div class="text-right">
+                          <input type="text" name="id" value="<?php echo$circuit[0]['id-cer']; ?>" hidden>
+                            <button type="submit" class="btn btn-primary" name='update'>Update</button>
+                            <button type="button" class="btn btn-secondary">Cancel</button>
+                          </div>
+                          
+                        </form>
+                      </div>
                 </div>
             </div>
             
@@ -235,6 +261,10 @@ $sql = 'SELECT *
             ============================================ -->
         <script src="js/main.js"></script>
 
+        <!--  summernote JS
+		============================================ -->
+    <script src="js/summernote/summernote-updated.min.js"></script>
+    <script src="js/summernote/summernote-active.js"></script>
     
 </body>
 
