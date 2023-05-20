@@ -1,6 +1,6 @@
 
 <?php 
-include 'connection.php';
+
 
 include 'connection.php';
 
@@ -14,10 +14,10 @@ include 'connection.php';
 
     $sql = 'SELECT *
             FROM restau
-            WHERE `id-rest` = :id_des';
+            WHERE `id-rest` = :id_rest';
 
     $statement = $pdo->prepare($sql);
-    $statement->bindValue(':id_des', $id_rest);
+    $statement->bindValue(':id_rest', $id_rest);
     $statement->execute();
 
     $res = $statement->fetchAll(PDO::FETCH_ASSOC);

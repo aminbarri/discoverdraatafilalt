@@ -1,15 +1,30 @@
-<?php
+<?php 
+
 include 'connection.php';
 
-$sql = 'SELECT * 
-		FROM hotel';
- $statement = $pdo->query($sql);
- $publishers = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+    ob_start();
+    include 'connection.php';
+
+
+    @$id_hotel = $_GET['modi'];
+
+    $sql = 'SELECT *
+            FROM hotel
+            WHERE `id-hotel` = :id_hotel';
+
+    $statement = $pdo->prepare($sql);
+    $statement->bindValue(':id_hotel', $id_hotel);
+    $statement->execute();
+
+    $hotel = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        
+
 
 
 ?>
-
-
 
 <!doctype html>
 <html class="no-js" lang="">
@@ -28,6 +43,7 @@ $sql = 'SELECT *
         <!-- Bootstrap CSS
             ============================================ -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
         <!-- font awesome CSS
             ============================================ -->
         <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -69,12 +85,18 @@ $sql = 'SELECT *
         <link rel="stylesheet" href="css/responsive.css">
         <!-- modernizr JS
             ============================================ -->
+
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <!-- summernote CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/summernote/summernote.css">
+        
 </head>
 
 <body>
- <!-- Start Header Top Area -->
- <div class="header-top-area">
+    
+     <!-- Start Header Top Area -->
+    <div class="header-top-area">
     <?php include 'tophead.html' ?>
 </div>
     <!-- End Header Top Area -->
@@ -92,81 +114,73 @@ $sql = 'SELECT *
     <div class="notika-status-area">
         <div class="container">
             <div class="row">
-            <?php 
-                  if(isset($_GET['success'])){ ?>
-                    <div class="alert alert-success" role="alert">
-                      <?php echo$_GET['success']; ?>
-                    </div>
-                <?php } ?>
-                <?php 
-                  if(isset($_GET['error'])){ ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php echo$_GET['error']; ?>
-                    </div>
-                <?php } ?>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="data-table-list">
-                        <div class="basic-tb-hd">
-                            <h2>Afficher les hotels</h2>
+                <div class="col-md-12">
+                    <h1>Ajouter Hotel</h1>
+                    <hr>
+                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
+                      <div class="form-row">
+                          <div class="col-md-6">
+                            <label for="title">Nom d'hotel:</label>
+                            <input type="text" class="form-control" name="name" value="<?php echo $hotel[0]['nom']; ?>" >
+                          </div>
+                          <div class="col-md-6">
+                            <label for="ville">Ville:</label>
+                            <input type="text" class="form-control"name='ville' value="<?php echo $hotel[0]['ville']; ?>" >
+                          </div>
                         </div>
-                        <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>hotel</th>
-                                        <th>ville</th>
-                                        
-                                      
-                                        <th>chambre</th>
-                                        <th>classe</th>
-                                        <th>date modification</th>
-                                   
-                                        <th>modifier</th>
-                                        <th>supprimer</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                         
-                                <?php
-                                
-                                
-                                if ($publishers) {
-                                    // show the publishers
-                                    foreach ($publishers as $publisher) {?>
-                                    <tr>
-                                        <td><?php  echo $publisher['nom'] ?></td>
-                                        <td><?php  echo $publisher['ville'] ?></td>
-                                        <td><?php  echo $publisher['chambre'] ?></td>
-                                        <td><?php  echo $publisher['classe'] ?></td>
-                                        <td><?php  echo $publisher['date-add'] ?></td>
-                                       
-                                        <td><a href="update-hotel.php?modi=<?php echo $publisher['id-hotel'] ?>"> <i class="bi bi-pencil"></i></a></td>
-                                        <td><a href="?id=<?php echo $publisher['id-hotel'] ?>"><i class="bi bi-trash"></i></a></td>
-                                    </tr>
-                                    
-                               <?php }}
-                                ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                    
-                                    <th>hotel</th>
-                                        <th>ville</th>
-                                        
-                                      
-                                        <th>chambre</th>
-                                        <th>classe</th>
-                                        <th>date modification</th>
-                                   
-                                        <th>modifier</th>
-                                        <th>supprimer</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                        
+                        
+                        <div class="form-row">
+                          
+                          <div class="col-md-6">
+                            <label for="image1">Image 1:</label>
+                            <input type="file" class="form-control-file" name="image1" value="<?php echo $hotel[0]['img1']; ?>">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="image2">Image 2:</label>
+                            <input type="file" class="form-control-file" name="image2" value="<?php echo $hotel[0]['img2']; ?>">
+                          </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                        
+                        <div class="form-row">
+                          
+                          <div class="col-md-6">
+                            <label for="image3">Image 3:</label>
+                            <input type="file" class="form-control-file" name="image3" value="<?php echo $hotel[0]['img3']; ?>">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="ville">Nomber de chambre:</label>
+                            <input type="number" class="form-control" name="chambre" value="<?php echo $hotel[0]['chambre']; ?>">
+                          </div>
+                        </div>
+                        
+                        <div class="form-row">
+                          
+                          <div class="col-md-6">
+                            <label for="">number d'etoil</label>
+                            <input type="number"  class="form-control" name='etoils' value="<?php echo $hotel[0]['classe']; ?>">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="ville">Localisation</label>
+                            <input type="text" class="form-control"  name='location' value="<?php echo $hotel[0]['location']; ?>">
+                          </div>
+                        </div>
+                      <div class="form-group">
+                        <label for="location">Carte:</label>
+                        
+                        <input type="text" class="form-control" name="carte" value="<?php echo $hotel[0]['carte']; ?>">
+                      </div>
+                     
+                      <div class="text-right">
+                        
+                    <input type="text" name="id" value="<?php echo$hotel[0]['id-hotel']; ?>" hidden>
+                        <button type="submit" class="btn btn-primary" name='update'>update</button>
+                        <button type="button" class="btn btn-secondary">Cancel</button>
+                      </div>
+                      
+                    </form>
+                  </div>
+              </div>
             
           
         </div>
@@ -250,7 +264,60 @@ $sql = 'SELECT *
             ============================================ -->
         <script src="js/main.js"></script>
 
+        <!--  summernote JS
+		============================================ -->
+    <script src="js/summernote/summernote-updated.min.js"></script>
+    <script src="js/summernote/summernote-active.js"></script>
     
 </body>
 
 </html>
+
+<?php
+    if (isset($_POST['update'])) {
+        foreach($_POST as $key => $value){
+            ${$key} = $value;
+        }
+        $image_h1 = $_FILES['image1'];
+        $image_h2 = $_FILES['image2'];
+        $image_h3 = $_FILES['image3'];
+        function rec_img($image_dest){
+            $valid_extension = array("png","jpeg","jpg");
+            $target_file = "img/hotels/".$image_dest['name'];
+            $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);     
+            $file_extension = strtolower($file_extension);
+            if(in_array($file_extension, $valid_extension)){
+              if(move_uploaded_file($image_dest['tmp_name'],$target_file)){
+                return true;
+              }
+              return false;
+            }
+            return false;
+          }
+          if(rec_img($image_h1) && rec_img($image_h2) && rec_img($image_h3)){
+             $ins = $pdo->prepare("UPDATE hotel SET   `nom`=?, `ville`=?, `carte`=?, `chambre`=?, `classe`=?, `location`=?, `img1`=?, `img2`=?, `img3`=?, `date-add`=CURRENT_TIMESTAMP WHERE  `id-hotel`=$id");
+             $ins->execute(array($name,$ville,$carte,$chambre,$etoils,$location, $image_h1['name'], $image_h2['name'], $image_h3['name']));
+            if ($ins) {
+                 header("Location: affiche-hotel.php?success=hotel a été modifiée avec succès");
+                
+             }else{
+
+                 header("Location: affiche-hotel.php?error=hotel n'a pas été modifiée avec succès!");
+             }
+         }else{
+
+        
+            $ins = $pdo->prepare("UPDATE hotel SET   `nom`=?, `ville`=?, `carte`=?, `chambre`=?, `classe`=?, `location`=?, `date-add`=CURRENT_TIMESTAMP WHERE  `id-hotel`=$id");
+            $ins->execute(array($name,$ville,$carte,$chambre,$etoils,$location));
+            
+            if ($ins) {
+                header("Location: affiche-hotel.php?success=hotel info a été modifiée avec succès");
+                
+            }
+            else{
+
+                header("Location: affiche-hotel.php?error= hotel info n'a pas été modifiée avec succès!");
+            }
+
+    }
+    }
