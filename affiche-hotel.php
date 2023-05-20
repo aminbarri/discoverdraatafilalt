@@ -119,7 +119,7 @@ $sql = 'SELECT *
                                       
                                         <th>chambre</th>
                                         <th>classe</th>
-                                        <th>date modification</th>
+                                        <th>dernière modification</th>
                                    
                                         <th>modifier</th>
                                         <th>supprimer</th>
@@ -156,7 +156,7 @@ $sql = 'SELECT *
                                       
                                         <th>chambre</th>
                                         <th>classe</th>
-                                        <th>date modification</th>
+                                        <th>dernière modification</th>
                                    
                                         <th>modifier</th>
                                         <th>supprimer</th>

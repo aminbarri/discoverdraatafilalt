@@ -2,7 +2,7 @@
 <?php 
 
 
-include 'connection.php';
+
 
 
 
@@ -317,3 +317,6 @@ include 'connection.php';
 
     }
     }
+    ob_end_flush();
+
+    ?>
