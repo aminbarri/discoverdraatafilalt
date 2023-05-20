@@ -1,11 +1,26 @@
-<?php
+<?php 
 include 'connection.php';
 
-$sql = 'SELECT * 
-		FROM destination';
- $statement = $pdo->query($sql);
- $publishers = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+
+ob_start();
+include 'connection.php';
+
+
+@$id_des = $_GET['modi'];
+
+$sql = 'SELECT *
+        FROM destination
+        WHERE `id-des` = :id_des';
+
+$statement = $pdo->prepare($sql);
+$statement->bindValue(':id_des', $id_des);
+$statement->execute();
+
+$des = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+   
 
 ?>
 
@@ -70,13 +85,18 @@ $sql = 'SELECT *
         <link rel="stylesheet" href="css/responsive.css">
         <!-- modernizr JS
             ============================================ -->
+
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <!-- summernote CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/summernote/summernote.css">
+        
 </head>
 
 <body>
     
-   <!-- Start Header Top Area -->
-   <div class="header-top-area">
+    <!-- Start Header Top Area -->
+    <div class="header-top-area">
     <?php include 'tophead.html' ?>
 </div>
     <!-- End Header Top Area -->
@@ -94,73 +114,59 @@ $sql = 'SELECT *
     <div class="notika-status-area">
         <div class="container">
             <div class="row">
-            <?php 
-                  if(isset($_GET['success'])){ ?>
-                    <div class="alert alert-success" role="alert">
-                      <?php echo$_GET['success']; ?>
-                    </div>
-                <?php } ?>
-                <?php 
-                  if(isset($_GET['error'])){ ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php echo$_GET['error']; ?>
-                    </div>
-                <?php } ?>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="data-table-list">
-                        <div class="basic-tb-hd">
-                            <h2>Afficher les destinations</h2>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="data-table-basic" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>distination</th>
-                                        <th>ville</th>
-                                        
-                                      
-                                        <th>date modification</th>
-                                   
-                                        <th>modifier</th>
-                                        <th>supprimer</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                         
-                                <?php
-                                
-                                
-                                if ($publishers) {
-                                    // show the publishers
-                                    foreach ($publishers as $publisher) {?>
-                                    <tr>
-                                        <td><?php  echo $publisher['nom'] ?></td>
-                                        <td><?php  echo $publisher['ville'] ?></td>
-                                        <td><?php  echo $publisher['date_modification'] ?></td>
-                                       
-                                        <td><a href="update-destination.php?modi=<?php echo $publisher['id-des'] ?>"> <i class="bi bi-pencil"></i></a></td>
-                                        <td><a href="?id=<?php echo $publisher['id-des'] ?>"><i class="bi bi-trash"></i></a></td>
-                                    </tr>
-                                    
-                               <?php }}
-                                ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                    
-                                        <th>distination</th>
-                                        <th>ville</th>
-                                        
-                                
-                                        <th>date modification</th>
-                                   
-                                        <th>modifier</th>
-                                        <th>supprimer</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
+                    <div class="col-md-12">
+                        <h1>Ajouter destination</h1>
+                        <hr>
+                        <form  method='POST' action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
+                          <div class="form-row">
+                              <div class="col-md-6">
+                                <label for="title">destination:</label>
+                                <input type="text" class="form-control" value="<?php echo $des[0]['nom']; ?>" name="title" placeholder="enter destination">
+                              </div>
+                              <div class="col-md-6">
+                                <label for="ville">Ville:</label>
+                                <input type="text" class="form-control" value="<?php echo $des[0]['ville']; ?>" name="ville" placeholder="Enter ville">
+                              </div>
+                            </div>
+                            
+                            
+                            <div class="form-row">
+                              
+                              <div class="col-md-6">
+                                <label for="province">Province:</label>
+                                <input type="text" class="form-control" value="<?php echo $des[0]['province']; ?>" name="province" placeholder="Enter province">
+                              </div><div class="col-md-6">
+                                <label for="image1">Image 1:</label>
+                                <input type="file" class="form-control-file" value="<?php echo $des[0]['img1']; ?>" name="image1" >
+                              </div>
+                            </div>
+                            
+                            <div class="form-row">
+                              <div class="col-md-6">
+                                <label for="image2">Image 2:</label>
+                                <input type="file" class="form-control-file" value="<?php echo $des[0]['img2']; ?>" name="image2" >
+                              </div>
+                              <div class="col-md-6">
+                                <label for="image3">Image 3:</label>
+                                <input type="file" class="form-control-file" name="image3" value="<?php echo $des[0]['img3']; ?>" >
+                              </div>
+                            </div>
+                            <h5>Location</h5>
+                            
+                            <textarea type="text" class="html-editor" name="location"><?php echo $des[0]['location']; ?></textarea>
+                            <h5>Description:</h5>
+                            <textarea type='text' class="html-editor" name='description'><?php echo $des[0]['description']; ?></textarea>
+                          
+                          
+                          <div class="text-right">
+                          <input type="text" name="id" value="<?php echo$des[0]['id-des']; ?>" hidden>
+                            <button type="submit" class="btn btn-primary" name='update'>update</button>
+                            <button type="button" class="btn btn-secondary" name='cancel'>Cancel</button>
+                          </div>
+                          
+                        </form>
+                      </div>
                 </div>
             </div>
             
@@ -170,16 +176,7 @@ $sql = 'SELECT *
     <!-- End Status area-->
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="footer-copy-right">
-                        <p>Copyright © 2023 
-. All rights reserved Discover Draa Tafilalt.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <?php include 'footer.html' ?>
     </div>
    <!-- End Footer area-->
     <!-- jquery
@@ -246,7 +243,67 @@ $sql = 'SELECT *
             ============================================ -->
         <script src="js/main.js"></script>
 
+        <!--  summernote JS
+		============================================ -->
+    <script src="js/summernote/summernote-updated.min.js"></script>
+    <script src="js/summernote/summernote-active.js"></script>
     
 </body>
 
 </html>
+
+
+<?php
+    if (isset($_POST['update'])) {
+        foreach($_POST as $key => $value){
+            ${$key} = $value;
+        }
+        $image_des1 = $_FILES['image1'];
+     $image_des2 = $_FILES['image2'];
+     $image_des3 = $_FILES['image3'];
+
+
+     function rec_img($image_dest){
+        $valid_extension = array("png","jpeg","jpg");
+        $target_file = "img/destinations/".$image_dest['name'];
+        $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);     
+        $file_extension = strtolower($file_extension);
+        if(in_array($file_extension, $valid_extension)){
+          if(move_uploaded_file($image_dest['tmp_name'],$target_file)){
+            return true;
+          }
+          return false;
+        }
+        return false;
+      }
+        
+           if(rec_img($image_des1) && rec_img($image_des2) && rec_img($image_des3)){
+             $ins = $pdo->prepare("UPDATE destination SET nom=?, ville=?, province=?, description=?,location=?,img1=?,img2=?,img3=?,date_modification=CURRENT_TIMESTAMP WHERE  `id-des`=$id");
+             $ins->execute(array($title,$ville,$province,$description,$location, $image_des1['name'], $image_des2['name'], $image_des3['name']));
+            if ($ins) {
+                 header("Location: affiche-destination.php?success=destination a été modifiée avec succès");
+                
+             }else{
+
+                 header("Location: affiche-destination.php?error=destination n'a pas été modifiée avec succès!");
+             }
+         }else{
+
+        
+            $ins = $pdo->prepare("UPDATE destination SET nom=?, ville=?, province=?, `description`=?,`location`=?,date_modification=CURRENT_TIMESTAMP WHERE  `id-des`=$id");
+            $ins->execute(array($title,$ville,$province,$description,$location));
+            
+            if ($ins) {
+                header("Location: affiche-destination.php?success=destination info a été modifiée avec succès");
+                
+            }
+            else{
+
+                header("Location: affiche-destination.php?error= destination info n'a pas été modifiée avec succès!");
+            }
+
+    }
+    }
+    
+ob_end_flush();
+?>
