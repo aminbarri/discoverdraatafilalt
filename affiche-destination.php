@@ -116,7 +116,7 @@ $sql = 'SELECT *
                                 <thead>
                                     <tr>
                                         <th>distination</th>
-                                        <th>ville</th>
+                                        <th>ville </th>
                                         
                                       
                                         <th>dernière modification</th>
