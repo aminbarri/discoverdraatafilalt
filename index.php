@@ -1,3 +1,31 @@
+<?php 
+ include "connection.php";
+
+ $sql1 = "SELECT COUNT(*) FROM client;";
+ $sql2 = "SELECT COUNT(*) FROM `reserver-hotel`;";
+ $sql3 = "SELECT COUNT(*) FROM destination;";
+ $sql4 = "SELECT COUNT(*) FROM restau;";
+ $sql5 = "SELECT COUNT(*) FROM hotel;";
+ $sql6 = "SELECT COUNT(*) FROM `admin`;";
+
+ $statement = $pdo->query($sql1);
+ $statement1 = $pdo->query($sql2);
+ $statement2 = $pdo->query($sql3);
+ $statement3 = $pdo->query($sql4);
+ $statement4 = $pdo->query($sql5);
+ $statement5 = $pdo->query($sql6);
+ 
+ // fetch the count as an associative array
+ $countClient = $statement->fetch(PDO::FETCH_ASSOC);
+ $countReser = $statement1->fetch(PDO::FETCH_ASSOC);
+ $countDest = $statement2->fetch(PDO::FETCH_ASSOC);
+ $countRes = $statement3->fetch(PDO::FETCH_ASSOC);
+ $countHotel = $statement4->fetch(PDO::FETCH_ASSOC);
+ $countAdmin = $statement5->fetch(PDO::FETCH_ASSOC);
+ 
+
+?>
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -347,7 +375,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
                         <div class="website-traffic-ctn">
-                            <h2><span class="counter">10</span></h2>
+                            <h2><span class="counter"><?php echo $countClient['COUNT(*)'] ?></span></h2>
                             <p>Client</p>
                         </div>
                         <div class="sparkline-bar-stats1">9,4,8,6,5,6,4,8,3,5,9,5</div>
@@ -356,7 +384,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
                         <div class="website-traffic-ctn">
-                            <h2><span class="counter">5</span></h2>
+                            <h2><span class="counter"><?php echo $countRes['COUNT(*)'] ?></span></h2>
                             <p>Reservations</p>
                         </div>
                         <div class="sparkline-bar-stats2">1,4,8,3,5,6,4,8,3,3,9,5</div>
@@ -365,7 +393,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
                         <div class="website-traffic-ctn">
-                            <h2><span class="counter">40</span></h2>
+                            <h2><span class="counter"><?php echo $countDest['COUNT(*)'] ?></span></h2>
                             <p>Destination</p>
                         </div>
                         <div class="sparkline-bar-stats3">4,2,8,2,5,6,3,8,3,5,9,5</div>
@@ -374,7 +402,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
                         <div class="website-traffic-ctn">
-                            <h2><span class="counter">20</span></h2>
+                            <h2><span class="counter"><?php echo $countRes['COUNT(*)'] ?></span></h2>
                             <p>Restaurants</p>
                         </div>
                         <div class="sparkline-bar-stats4">2,4,8,4,5,7,4,7,3,5,7,5</div>
@@ -383,7 +411,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
                         <div class="website-traffic-ctn">
-                            <h2><span class="counter">25</span></h2>
+                            <h2><span class="counter"><?php echo $countHotel['COUNT(*)'] ?></span></h2>
                             <p>Hotels</p>
                         </div>
                         <div class="sparkline-bar-stats5">2,4,8,4,5,7,4,7,3,5,7,5</div>
@@ -392,7 +420,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
                         <div class="website-traffic-ctn">
-                            <h2><span class="counter">2</span></h2>
+                            <h2><span class="counter"><?php echo $countAdmin['COUNT(*)'] ?></span></h2>
                             <p>administrateur</p>
                         </div>
                         <div class="sparkline-bar-stats6">2,4,8,4,5,7,4,7,3,5,7,5</div>
