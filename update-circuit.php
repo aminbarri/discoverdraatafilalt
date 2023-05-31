@@ -7,14 +7,14 @@ include 'connection.php';
 @$id_cer = $_GET['modi'];
 
 $sql = 'SELECT *
-        FROM circuit
+        FROM Voyage
         WHERE `id-cer` = :id_cer';
 
 $statement = $pdo->prepare($sql);
 $statement->bindValue(':id_cer', $id_cer);
 $statement->execute();
 
-$circuit = $statement->fetchAll(PDO::FETCH_ASSOC);
+$Voyage = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!doctype html>
@@ -107,23 +107,23 @@ $circuit = $statement->fetchAll(PDO::FETCH_ASSOC);
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="col-md-12">
-                        <h1>Ajouter circuit</h1>
+                        <h1>Ajouter Voyage</h1>
                         <hr>
                         <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
                           <div class="form-row">
                               <div class="col-md-6">
                                 <label for="title">Ville Départ</label>
-                                <input type="text" value="<?php echo $circuit[0]['ville-depart']; ?>"  class="form-control" name="ville_dpart" placeholder="">
+                                <input type="text" value="<?php echo $Voyage[0]['ville-depart']; ?>"  class="form-control" name="ville_dpart" placeholder="">
                               </div>
                               <div class="col-md-6">
                                 <label for="ville">Ville Arrivée</label>
-                                <input type="text" class="form-control" value="<?php echo $circuit[0]['ville-arrive']; ?>" name="ville_arrive" placeholder="">
+                                <input type="text" class="form-control" value="<?php echo $Voyage[0]['ville-arrive']; ?>" name="ville_arrive" placeholder="">
                               </div>
                             </div>
                             <div class="">
                                 <h5>Trajet</h5>
                            
-                             <textarea type="text" class="form-control html-editor" value="" name="trajet" placeholder=""><?php echo $circuit[0]['trajet']; ?></textarea>
+                             <textarea type="text" class="form-control html-editor" value="" name="trajet" placeholder=""><?php echo $Voyage[0]['trajet']; ?></textarea>
                             </div>
                             
                       
@@ -132,11 +132,11 @@ $circuit = $statement->fetchAll(PDO::FETCH_ASSOC);
                               
                               <div class="col-md-6">
                                 <label for="province">Date depart:</label>
-                                <input type="date" class="form-control" name="date_depart" value='<?php echo $circuit[0]['date-depart']; ?>'>
+                                <input type="date" class="form-control" name="date_depart" value='<?php echo $Voyage[0]['date-depart']; ?>'>
                               </div>
                               <div class="col-md-6">
                                 <label for="province">heure depart:</label>
-                                <input type="time" class="form-control "value="<?php echo $circuit[0]['heure-depart']; ?>" name='heure_depart'>
+                                <input type="time" class="form-control "value="<?php echo $Voyage[0]['heure-depart']; ?>" name='heure_depart'>
                              
                             </div>
                             </div>
@@ -145,31 +145,31 @@ $circuit = $statement->fetchAll(PDO::FETCH_ASSOC);
                             <div class="form-row">
                               <div class="col-md-6">
                                 <label for="province">Dure:</label>
-                                <input type="number" class="form-control" value="<?php echo $circuit[0]['dure']; ?>" name='dure'>
+                                <input type="number" class="form-control" value="<?php echo $Voyage[0]['dure']; ?>" name='dure'>
                               </div>
                               <div class="col-md-6">
                                 <label for="image3">Image cover:</label>
-                                <input type="file" class="form-control-file" value="<?php echo $circuit[0]['img']; ?>" name="image3">
+                                <input type="file" class="form-control-file" value="<?php echo $Voyage[0]['img']; ?>" name="image3">
                               </div>
                             </div>
                             <div class="form-row"> <div class="col-md-12">
                               <label for="province">Carte trajet:</label>
-                              <input type="text" class="form-control" value="<?php echo $circuit[0]['carte']; ?>" name="carte_trajet" >
+                              <input type="text" class="form-control" value="<?php echo $Voyage[0]['carte']; ?>" name="carte_trajet" >
                             </div>
                           </div>
                            
                             <div class="form-row">
                               <div class="col-md-6">
                                 <label for="province">Prix:</label>
-                                <input type="number" class="form-control" name="prix" value="<?php echo $circuit[0]['prix']; ?>">
+                                <input type="number" class="form-control" name="prix" value="<?php echo $Voyage[0]['prix']; ?>">
                               </div>
                               <div class="col-md-6">
                                 <label for="province">Date de reservation:</label>
-                                <input type="date" class="form-control" name="date_reser" value="<?php echo $circuit[0]['date-res']; ?>" >
+                                <input type="date" class="form-control" name="date_reser" value="<?php echo $Voyage[0]['date-res']; ?>" >
                               </div>
                             </div>
                           <div class="text-right">
-                          <input type="text" name="id" value="<?php echo$circuit[0]['id-cer']; ?>" hidden>
+                          <input type="text" name="id" value="<?php echo$Voyage[0]['id-cer']; ?>" hidden>
                             <button type="submit" class="btn btn-primary" name='update'>Update</button>
                             <button type="button" class="btn btn-secondary">Cancel</button>
                           </div>
@@ -285,28 +285,28 @@ $circuit = $statement->fetchAll(PDO::FETCH_ASSOC);
          $valid_extension = array("png","jpeg","jpg");
          if(in_array($file_extension, $valid_extension)){
            if(move_uploaded_file($img_cover['tmp_name'],$target_file)){
-             $ins = $pdo->prepare("UPDATE circuit SET `ville-depart`=?,`ville-arrive`=?,`trajet`=?,`date-depart`=?,`heure-depart`=?,`dure`=?,`img`=?,`carte`=?,`prix`=?,`date-res`=?,`date-creation`=CURRENT_TIMESTAMP WHERE  `id-cer`=$id");
+             $ins = $pdo->prepare("UPDATE Voyage SET `ville-depart`=?,`ville-arrive`=?,`trajet`=?,`date-depart`=?,`heure-depart`=?,`dure`=?,`img`=?,`carte`=?,`prix`=?,`date-res`=?,`date-creation`=CURRENT_TIMESTAMP WHERE  `id-cer`=$id");
              $ins->execute(array($ville_dpart,$ville_arrive,$trajet,$date_depart,$heure_depart,$dure,$img_cover['name'],$carte_trajet,$prix,$date_reser));
             if ($ins) {
-                 header("Location: affiche-circuit.php?success=circuit a été modifiée avec succès");
+                 header("Location: affiche-Voyage.php?success=Voyage a été modifiée avec succès");
                 
              }else{
 
-                 header("Location: affiche-circuit.php?error=circuit n'a pas été modifiée avec succès!");
+                 header("Location: affiche-Voyage.php?error=Voyage n'a pas été modifiée avec succès!");
              }
          }}else{
 
         
-            $ins = $pdo->prepare("UPDATE circuit SET `ville-depart`=?,`ville-arrive`=?,`trajet`=?,`date-depart`=?,`heure-depart`=?,`dure`=?,`carte`=?,`prix`=?,`date-res`=?,`date-creation`=CURRENT_TIMESTAMP WHERE  `id-cer`=$id");
+            $ins = $pdo->prepare("UPDATE Voyage SET `ville-depart`=?,`ville-arrive`=?,`trajet`=?,`date-depart`=?,`heure-depart`=?,`dure`=?,`carte`=?,`prix`=?,`date-res`=?,`date-creation`=CURRENT_TIMESTAMP WHERE  `id-cer`=$id");
             $ins->execute(array($ville_dpart,$ville_arrive,$trajet,$date_depart,$heure_depart,$dure,$carte_trajet,$prix,$date_reser));
             
             if ($ins) {
-                header("Location: affiche-circuit.php?success=circuit info a été modifiée avec succès");
+                header("Location: affiche-Voyage.php?success=Voyage info a été modifiée avec succès");
                 
             }
             else{
 
-                header("Location: affiche-circuit.php?error= circuit info n'a pas été modifiée avec succès!");
+                header("Location: affiche-Voyage.php?error= Voyage info n'a pas été modifiée avec succès!");
             }
 
     }

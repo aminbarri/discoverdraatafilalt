@@ -1,29 +1,15 @@
-
 <?php
 include 'connection.php';
 
-if(isset($_POST['submit'])) {
-  
-    foreach($_POST as $key => $value){
-        ${$key} = $value;
-    }
-    $img_cover = $_FILES['image3'];
+$sql = 'SELECT * 
+		FROM `reserver-hotel`';
+ $statement = $pdo->query($sql);
+ $publishers = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
-    $valid_extension = array("png","jpeg","jpg");
-    $target_file = "img/cercuit/".$img_cover['name'];
-    $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);     
-    $file_extension = strtolower($file_extension);
-    $valid_extension = array("png","jpeg","jpg");
-    if(in_array($file_extension, $valid_extension)){
-      if(move_uploaded_file($img_cover['tmp_name'],$target_file)){
-        $statement = $pdo->prepare("INSERT INTO Voyage ( `ville-depart`, `ville-arrive`, `trajet`, `date-depart`, `heure-depart`, `dure`, `img`, `carte`, `prix`, `date-res`, `date-creation`) VALUES(?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)");
-        $statement->execute(array($ville_dpart,$ville_arrive,$trajet,$date_depart,$heure_depart,$dure,$img_cover['name'],$carte_trajet,$prix,$date_reser));
-      }
-
-    }
-  }
 ?>
+
+
 
 <!doctype html>
 <html class="no-js" lang="">
@@ -42,7 +28,7 @@ if(isset($_POST['submit'])) {
         <!-- Bootstrap CSS
             ============================================ -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+        
         <!-- font awesome CSS
             ============================================ -->
         <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -84,18 +70,13 @@ if(isset($_POST['submit'])) {
         <link rel="stylesheet" href="css/responsive.css">
         <!-- modernizr JS
             ============================================ -->
-
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-        <!-- summernote CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/summernote/summernote.css">
-        
 </head>
 
 <body>
     
-   <!-- Start Header Top Area -->
-   <div class="header-top-area">
+<!-- Start Header Top Area -->
+<div class="header-top-area">
     <?php include 'tophead.html' ?>
 </div>
     <!-- End Header Top Area -->
@@ -113,76 +94,82 @@ if(isset($_POST['submit'])) {
     <div class="notika-status-area">
         <div class="container">
             <div class="row">
+            <?php 
+                  if(isset($_GET['success'])){ ?>
+                    <div class="alert alert-success" role="alert">
+                      <?php echo$_GET['success']; ?>
+                    </div>
+                <?php } ?>
+                <?php 
+                  if(isset($_GET['error'])){ ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo$_GET['error']; ?>
+                    </div>
+                <?php } ?>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="col-md-12">
-                        <h1>Ajouter Voyage</h1>
-                        <hr>
-                        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
-                          <div class="form-row">
-                              <div class="col-md-6">
-                                <label for="title">Ville Départ</label>
-                                <input type="text" class="form-control" name="ville_dpart" placeholder="">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="ville">Ville Arrivée</label>
-                                <input type="text" class="form-control" name="ville_arrive" placeholder="">
-                              </div>
-                            </div>
-                            <div class="">
-                                <h5>Trajet</h5>
-                           
-                             <textarea type="text" class="form-control html-editor"   name="trajet" placeholder=""></textarea>
-                            </div>
-                            
-                      
-                            
-                            <div class="form-row">
-                              
-                              <div class="col-md-6">
-                                <label for="province">Date depart:</label>
-                                <input type="date" class="form-control" name="date_depart" >
-                              </div>
-                              <div class="col-md-6">
-                                <label for="province">heure depart:</label>
-                                <input type="time" class="form-control" name='heure_depart'>
-                             
-                            </div>
-                            </div>
-              
-                            
-                            <div class="form-row">
-                              <div class="col-md-6">
-                                <label for="province">Dure:</label>
-                                <input type="number" class="form-control" name='dure'>
-                              </div>
-                              <div class="col-md-6">
-                                <label for="image3">Image cover:</label>
-                                <input type="file" class="form-control-file" name="image3">
-                              </div>
-                            </div>
-                            <div class="form-row"> <div class="col-md-12">
-                              <label for="province">Carte trajet:</label>
-                              <input type="text" class="form-control" name="carte_trajet" >
-                            </div>
-                          </div>
-                           
-                            <div class="form-row">
-                              <div class="col-md-6">
-                                <label for="province">Prix:</label>
-                                <input type="number" class="form-control" name="prix">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="province">Date de reservation:</label>
-                                <input type="date" class="form-control" name="date_reser" >
-                              </div>
-                            </div>
-                          <div class="text-right">
-                            <button type="submit" class="btn btn-primary" name='submit'>Ajouter</button>
-                            <button type="button" class="btn btn-secondary">Cancel</button>
-                          </div>
-                          
-                        </form>
-                      </div>
+                    <div class="data-table-list">
+                        <div class="basic-tb-hd">
+                            <h2>Réservation des hôtels</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Hotel id</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>type</th>
+                                      
+                                        <th>Date-debut	</th>
+                                   
+                                        <th>Date-fin</th>
+                                        <th>Date-reservartion</th>
+                                        <th>Status</th>
+                                        <th>Modifier</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                         
+                                <?php
+                                
+                                
+                                if ($publishers) {
+                                    // show the publishers
+                                    foreach ($publishers as $publisher) {?>
+                                    <tr>
+                                        <td><?php  echo $publisher['id-hotel'] ?></td>
+                                        <td><?php  echo $publisher['email'] ?></td>
+                                        <td><?php  echo $publisher['phone'] ?></td>
+                                        <td><?php  echo $publisher['type'] ?></td>
+                                        <td><?php  echo $publisher['date-debut'] ?></td>
+                                        <td><?php  echo $publisher['date-fin'] ?></td>
+                                        <td><?php  echo $publisher['date-reservartion'] ?></td>
+                                        <td><?php  echo $publisher['statu'] ?></td>
+                                        <td><a href="update-resehotel.php?modi=<?php echo $publisher['id-resh'] ?>"> <i class="bi bi-pencil"></i></a></td>
+                                       
+                                     </tr>
+                                    
+                               <?php }}
+                                ?>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                    
+                                    <th>Hotel id</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>type</th>
+                                      
+                                        <th>Date-debut	</th>
+                                   
+                                        <th>Date-fin</th>
+                                        <th>Date-reservartion</th>
+                                        <th>Status</th>
+                                        <th>Modifier</th>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -268,10 +255,6 @@ if(isset($_POST['submit'])) {
             ============================================ -->
         <script src="js/main.js"></script>
 
-        <!--  summernote JS
-		============================================ -->
-    <script src="js/summernote/summernote-updated.min.js"></script>
-    <script src="js/summernote/summernote-active.js"></script>
     
 </body>
 

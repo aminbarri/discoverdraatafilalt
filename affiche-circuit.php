@@ -2,7 +2,7 @@
 include 'connection.php';
 
 $sql = 'SELECT * 
-		FROM circuit';
+		FROM Voyage';
  $statement = $pdo->query($sql);
  $publishers = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -109,7 +109,7 @@ $sql = 'SELECT *
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2>Afficher les circuit</h2>
+                            <h2>Afficher les Voyages</h2>
                         </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
@@ -140,7 +140,7 @@ $sql = 'SELECT *
                                         <td><?php echo $publisher['heure-depart'] ?></td>
                                         <td><?php echo $publisher['dure'] ?></td>
                                         <td><?php echo $publisher['prix'] ?></td>
-                                        <td><a href="update-circuit.php?modi=<?php echo $publisher['id-cer'] ?>"> <i class="bi bi-pencil"></i></a></td>
+                                        <td><a href="update-Voyage.php?modi=<?php echo $publisher['id-cer'] ?>"> <i class="bi bi-pencil"></i></a></td>
                                         <td><a href="?id=<?php echo $publisher['id-cer'] ?>"><i class="bi bi-trash"></i></a></td>
                                     </tr>
                                     

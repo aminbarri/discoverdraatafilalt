@@ -1,28 +1,29 @@
 
-<?php
+
+
+
+<?php 
+
+
+ob_start();
 include 'connection.php';
 
-if(isset($_POST['submit'])) {
-  
-    foreach($_POST as $key => $value){
-        ${$key} = $value;
-    }
-    $img_cover = $_FILES['image3'];
+
+@$id_resh = $_GET['modi'];
+
+$sql = 'SELECT *
+        FROM `reserver-hotel`
+        WHERE `id-resh` = :id_resh';
+
+$statement = $pdo->prepare($sql);
+$statement->bindValue(':id_resh', $id_resh);
+$statement->execute();
+
+$resreve = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    
 
 
-    $valid_extension = array("png","jpeg","jpg");
-    $target_file = "img/cercuit/".$img_cover['name'];
-    $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);     
-    $file_extension = strtolower($file_extension);
-    $valid_extension = array("png","jpeg","jpg");
-    if(in_array($file_extension, $valid_extension)){
-      if(move_uploaded_file($img_cover['tmp_name'],$target_file)){
-        $statement = $pdo->prepare("INSERT INTO Voyage ( `ville-depart`, `ville-arrive`, `trajet`, `date-depart`, `heure-depart`, `dure`, `img`, `carte`, `prix`, `date-res`, `date-creation`) VALUES(?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)");
-        $statement->execute(array($ville_dpart,$ville_arrive,$trajet,$date_depart,$heure_depart,$dure,$img_cover['name'],$carte_trajet,$prix,$date_reser));
-      }
-
-    }
-  }
 ?>
 
 <!doctype html>
@@ -94,8 +95,8 @@ if(isset($_POST['submit'])) {
 
 <body>
     
-   <!-- Start Header Top Area -->
-   <div class="header-top-area">
+ <!-- Start Header Top Area -->
+ <div class="header-top-area">
     <?php include 'tophead.html' ?>
 </div>
     <!-- End Header Top Area -->
@@ -113,78 +114,59 @@ if(isset($_POST['submit'])) {
     <div class="notika-status-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="col-md-12">
-                        <h1>Ajouter Voyage</h1>
-                        <hr>
-                        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
-                          <div class="form-row">
-                              <div class="col-md-6">
-                                <label for="title">Ville Départ</label>
-                                <input type="text" class="form-control" name="ville_dpart" placeholder="">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="ville">Ville Arrivée</label>
-                                <input type="text" class="form-control" name="ville_arrive" placeholder="">
-                              </div>
-                            </div>
-                            <div class="">
-                                <h5>Trajet</h5>
-                           
-                             <textarea type="text" class="form-control html-editor"   name="trajet" placeholder=""></textarea>
-                            </div>
-                            
-                      
-                            
-                            <div class="form-row">
+                <div class="col-md-12">
+                    <h1>Ajouter Moussem</h1>
+                    <hr>
+                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
+                      <div class="form-row">
+                          <div class="col-md-6">
+                            <label for="title">Email</label>
+                            <input type="text" class="form-control" name="email" value="<?php echo$resreve[0]['email']; ?>" placeholder="Email">
+                          </div>
+                          <div class="col-md-6">
+                            <label for="ville">Phone</label>
+                            <input type="text" class="form-control" name="phone" value="<?php echo$resreve[0]['phone']; ?>"  placeholder="phone">
+                          </div>
+                        </div>
+                        
+                        <div class="form-row">
                               
                               <div class="col-md-6">
-                                <label for="province">Date depart:</label>
-                                <input type="date" class="form-control" name="date_depart" >
+                                <label for="">Date debut:</label>
+                                <input type="date" class="form-control" name="date_debut" value="<?php echo$resreve[0]['date-debut']; ?>" >
                               </div>
                               <div class="col-md-6">
-                                <label for="province">heure depart:</label>
-                                <input type="time" class="form-control" name='heure_depart'>
+                                <label for="">Date fin:</label>
+                                <input type="date" class="form-control" name='date_fin' value="<?php echo$resreve[0]['date-fin']; ?>" >
                              
                             </div>
+                         </div>
+                         <div class="form-row" style="margin-top: 10px;">
+                              
+                              <div class="col-md-6">
+                        
+                                    <label for="">Status</label>
+                                    <select class="form-select" aria-label="Default select example" name='statu'>
+                                     
+                                     <option value="Acceptée">Acceptée</option>
+                                     <option value="Refusée">Refusée</option>
+                                    </select>
+                              </div>
                             </div>
               
                             
-                            <div class="form-row">
-                              <div class="col-md-6">
-                                <label for="province">Dure:</label>
-                                <input type="number" class="form-control" name='dure'>
-                              </div>
-                              <div class="col-md-6">
-                                <label for="image3">Image cover:</label>
-                                <input type="file" class="form-control-file" name="image3">
-                              </div>
-                            </div>
-                            <div class="form-row"> <div class="col-md-12">
-                              <label for="province">Carte trajet:</label>
-                              <input type="text" class="form-control" name="carte_trajet" >
-                            </div>
-                          </div>
-                           
-                            <div class="form-row">
-                              <div class="col-md-6">
-                                <label for="province">Prix:</label>
-                                <input type="number" class="form-control" name="prix">
-                              </div>
-                              <div class="col-md-6">
-                                <label for="province">Date de reservation:</label>
-                                <input type="date" class="form-control" name="date_reser" >
-                              </div>
-                            </div>
-                          <div class="text-right">
-                            <button type="submit" class="btn btn-primary" name='submit'>Ajouter</button>
-                            <button type="button" class="btn btn-secondary">Cancel</button>
-                          </div>
-                          
-                        </form>
+                        
+                       
+                      <div class="text-right">
+                        
+                      <input type="text" name="id" value="<?php echo$resreve[0]['id-resh']; ?>" hidden>
+                        <button type="submit" class="btn btn-primary" name='update'>update</button>
+                        <button type="button" class="btn btn-secondary">Cancel</button>
                       </div>
-                </div>
-            </div>
+                      
+                    </form>
+                  </div>
+              </div>
             
           
         </div>
@@ -276,3 +258,23 @@ if(isset($_POST['submit'])) {
 </body>
 
 </html>
+
+<?php 
+
+
+if((isset($_POST['update']))){
+    foreach($_POST as $key => $value){
+        ${$key} = $value;
+    }
+      
+        $ins = $pdo->prepare("UPDATE  `reserver-hotel`  set  `email`=?, `phone`=?, `date-debut`=?, `date-fin`=? ,`statu`=? WHERE `id-resh`=$id");
+        $ins->execute(array($email,$phone,$date_debut,$date_fin,$statu));
+        if ($ins) {
+            header("Location: affiche-reservehtl.php?success=Reservation a été modifiée avec succès");
+           
+        }else{
+
+            header("Location: affiche-reservehtl.php?error=Reservation n'a pas été modifiée avec succès!");
+        }
+    }
+    ?>

@@ -165,11 +165,11 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#demolibra" href="#">Circuits</a>
+                                <li><a data-toggle="collapse" data-target="#demolibra" href="#">Voyage</a>
                                     <ul id="demolibra" class="collapse dropdown-header-top">
-                                        <li><a href="">Afficher les circuits</a>
+                                        <li><a href="">Afficher les Voyages</a>
                                         </li>
-                                        <li><a href="ajouter-cer.html">Ajouter un circuit</a>
+                                        <li><a href="ajouter-cer.html">Ajouter un Voyage</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -260,7 +260,7 @@
                         </li>
                         <li class=""><a data-toggle="tab" href="#client"><i class="notika-icon bi bi-people"></i> Gerer les clients</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Circuits"><i class="notika-icon bi bi-circle"></i> Circuits</a>
+                        <li><a data-toggle="tab" href="#Voyage"><i class="notika-icon bi bi-circle"></i> Voyage</a>
                         </li>
                         <li><a data-toggle="tab" href="#Destinations"><i class="notika-icon bi bi-pin-map "></i> Destinations</a>
                         </li>
@@ -298,11 +298,11 @@
                                
                             </ul>
                         </div>
-                        <div id="Circuits" class="tab-pane notika-tab-menu-bg animated flipInX">
+                        <div id="Voyage" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="">Afficher les circuits</a>
+                                <li><a href="">Afficher les Voyages</a>
                                 </li>
-                                <li><a href="ajouter-cer.html">Ajouter un circuit</a>
+                                <li><a href="ajouter-cer.html">Ajouter un Voyage</a>
                                 </li>
                             </ul>
                         </div>
