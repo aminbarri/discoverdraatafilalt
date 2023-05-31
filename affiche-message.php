@@ -138,7 +138,7 @@ $sql = 'SELECT *
                                         <td><?php  echo $publisher['sujet'] ?></td>
                                         <td><?php  echo $publisher['date_sending'] ?></td>
                                         <td><a href="veuemail.php?id=<?php echo $publisher['id_mess'] ?>"><i class="bi bi-check-all"></i></a></td>
-                                        <td><a href="?id=<?php echo $publisher['id_mess'] ?>"><i class="bi bi-trash"></i></a></td>
+                                        <td><a href="delete-message.php?id=<?php echo $publisher['id_mess'] ?>"><i class="bi bi-trash"></i></a></td>
                                     </tr>
                                     
                                <?php }}

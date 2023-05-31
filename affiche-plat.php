@@ -140,7 +140,7 @@ $sql = 'SELECT *
                                         
                                        
                                         <td><a href="update-plat.php?modi=<?php echo $publisher['id-plat'] ?>"> <i class="bi bi-pencil"></i></a></td>
-                                        <td><a href="?id=<?php echo $publisher['id-plat'] ?>"><i class="bi bi-trash"></i></a></td>
+                                        <td><a href="delete-plat.php?id=<?php echo $publisher['id-plat'] ?>"><i class="bi bi-trash"></i></a></td>
                                     </tr>
                                     
                                <?php }}

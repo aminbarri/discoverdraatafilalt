@@ -126,6 +126,7 @@ $sql = 'SELECT *
                                         <th>Date-reservartion</th>
                                         <th>Status</th>
                                         <th>Modifier</th>
+                                        <th>Supprimer</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -146,6 +147,7 @@ $sql = 'SELECT *
                                         <td><?php  echo $publisher['date-reservartion'] ?></td>
                                         <td><?php  echo $publisher['statu'] ?></td>
                                         <td><a href="update-resehotel.php?modi=<?php echo $publisher['id-resh'] ?>"> <i class="bi bi-pencil"></i></a></td>
+                                        <td><a href="delete-reshtl.php?id=<?php echo $publisher['id-resh'] ?>"> <i class="bi bi-trash"></i></a></td>
                                        
                                      </tr>
                                     
@@ -166,6 +168,7 @@ $sql = 'SELECT *
                                         <th>Date-reservartion</th>
                                         <th>Status</th>
                                         <th>Modifier</th>
+                                       <th>Supprimer</th>
                                 </tfoot>
                             </table>
                         </div>

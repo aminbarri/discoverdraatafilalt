@@ -140,8 +140,8 @@ $sql = 'SELECT *
                                         <td><?php echo $publisher['heure-depart'] ?></td>
                                         <td><?php echo $publisher['dure'] ?></td>
                                         <td><?php echo $publisher['prix'] ?></td>
-                                        <td><a href="update-Voyage.php?modi=<?php echo $publisher['id-cer'] ?>"> <i class="bi bi-pencil"></i></a></td>
-                                        <td><a href="?id=<?php echo $publisher['id-cer'] ?>"><i class="bi bi-trash"></i></a></td>
+                                        <td><a href="update-voyage.php?modi=<?php echo $publisher['id-cer'] ?>"> <i class="bi bi-pencil"></i></a></td>
+                                        <td><a href="delete-voyage.php?id=<?php echo $publisher['id-cer'] ?>"><i class="bi bi-trash"></i></a></td>
                                     </tr>
                                     
                                <?php }}

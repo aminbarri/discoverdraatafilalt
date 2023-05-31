@@ -141,7 +141,7 @@ $sql = 'SELECT *
                                         <td><?php  echo $publisher['date-add'] ?></td>
                                        
                                         <td><a href="update-hotel.php?modi=<?php echo $publisher['id-hotel'] ?>"> <i class="bi bi-pencil"></i></a></td>
-                                        <td><a href="?id=<?php echo $publisher['id-hotel'] ?>"><i class="bi bi-trash"></i></a></td>
+                                        <td><a href="delete-hotel.php?id=<?php echo $publisher['id-hotel'] ?>"><i class="bi bi-trash"></i></a></td>
                                     </tr>
                                     
                                <?php }}

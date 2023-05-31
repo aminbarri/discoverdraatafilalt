@@ -139,7 +139,7 @@ $sql = 'SELECT *
                                         <td><?php  echo $publisher['date_modification'] ?></td>
                                        
                                         <td><a href="update-destination.php?modi=<?php echo $publisher['id-des'] ?>"> <i class="bi bi-pencil"></i></a></td>
-                                        <td><a href="?id=<?php echo $publisher['id-des'] ?>"><i class="bi bi-trash"></i></a></td>
+                                        <td><a href="delete-des.php?id=<?php echo $publisher['id-des'] ?>"><i class="bi bi-trash"></i></a></td>
                                     </tr>
                                     
                                <?php }}
