@@ -109,7 +109,7 @@ $sql = 'SELECT *
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
-                            <h2>Réservation des hôtels</h2>
+                            <h2>Réservation des voyages</h2>
                         </div>
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
@@ -143,7 +143,7 @@ $sql = 'SELECT *
                                         
                                         <td><?php  echo $publisher['date-reservartion'] ?></td>
                                       
-                                        <td><a href="?modi=<?php echo $publisher['id_voya'] ?>"> <i class="bi bi-trash"></i></a></td>
+                                        <td><a href="delete-resvoy.php?id=<?php echo $publisher['id_voya'] ?>"> <i class="bi bi-trash"></i></a></td>
                                        
                                      </tr>
                                     
