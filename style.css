@@ -4734,3 +4734,37 @@ form label {
   .form-row{
    display: flex;
   }
+
+  /*----------------------------------------*/
+/*  . Reservation hotel page
+/*----------------------------------------*/
+.status{
+ display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+width: 300px;
+
+margin-bottom: 15px;
+}
+.status>button{
+    padding: 5px 10px 5px 10px;
+   
+   border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+#reffuse{
+    background-color: #e16969;
+
+}
+#reffuse:hover,#accepter:hover,#encours:hover{
+    background-color: #b9b9b9;
+
+}
+
+#accepter{
+    background-color: green;
+}
+#encours{
+    background-color: #00c292;
+}

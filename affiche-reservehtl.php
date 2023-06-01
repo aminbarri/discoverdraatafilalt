@@ -2,11 +2,23 @@
 include 'connection.php';
 
 $sql = 'SELECT * 
-		FROM `reserver-hotel`';
+		FROM `reserver-hotel` 
+        where statu = "En cours"';
+
+$sql2 = 'SELECT * 
+		FROM `reserver-hotel` 
+        where statu = "Acceptée"';
+
+$sql3 = 'SELECT * 
+		FROM `reserver-hotel` 
+        where statu = "Refusée"';
+
  $statement = $pdo->query($sql);
+ $statement2 = $pdo->query($sql2);
+ $statement3 = $pdo->query($sql3);
  $publishers = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-
+ $publishers1 = $statement2->fetchAll(PDO::FETCH_ASSOC);
+ $publishers2 = $statement3->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
@@ -111,6 +123,14 @@ $sql = 'SELECT *
                         <div class="basic-tb-hd">
                             <h2>Réservation des hôtels</h2>
                         </div>
+                        <div class="status">
+                            <button id='encours' value="En cours">En cours</button>
+                            <button id='accepter' value='Acceptee'>Acceptée</button>
+                            <button id='reffuse' value="refuse">Refusée</button>
+                        </div>
+                        <div id='encours_div'>
+
+                        
                         <div class="table-responsive">
                             <table id="data-table-basic" class="table table-striped">
                                 <thead>
@@ -172,7 +192,136 @@ $sql = 'SELECT *
                                 </tfoot>
                             </table>
                         </div>
-                    </div>
+                        </div>
+                        <div id='acceptee_div'>
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Hotel id</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>type</th>
+                                      
+                                        <th>Date-debut	</th>
+                                   
+                                        <th>Date-fin</th>
+                                        <th>Date-reservartion</th>
+                                        <th>Status</th>
+                                        <th>Modifier</th>
+                                        <th>Supprimer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                         
+                                <?php
+                                
+                                
+                                if ($publishers1) {
+                                    // show the publishers
+                                    foreach ($publishers1 as $publisher) {?>
+                                    <tr>
+                                        <td><?php  echo $publisher['id-hotel'] ?></td>
+                                        <td><?php  echo $publisher['email'] ?></td>
+                                        <td><?php  echo $publisher['phone'] ?></td>
+                                        <td><?php  echo $publisher['type'] ?></td>
+                                        <td><?php  echo $publisher['date-debut'] ?></td>
+                                        <td><?php  echo $publisher['date-fin'] ?></td>
+                                        <td><?php  echo $publisher['date-reservartion'] ?></td>
+                                        <td><?php  echo $publisher['statu'] ?></td>
+                                        <td><a href="update-resehotel.php?modi=<?php echo $publisher['id-resh'] ?>"> <i class="bi bi-pencil"></i></a></td>
+                                        <td><a href="delete-reshtl.php?id=<?php echo $publisher['id-resh'] ?>"> <i class="bi bi-trash"></i></a></td>
+                                       
+                                     </tr>
+                                    
+                               <?php }}
+                                ?>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                    
+                                    <th>Hotel id</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>type</th>
+                                      
+                                        <th>Date-debut	</th>
+                                   
+                                        <th>Date-fin</th>
+                                        <th>Date-reservartion</th>
+                                        <th>Status</th>
+                                        <th>Modifier</th>
+                                       <th>Supprimer</th>
+                                </tfoot>
+                            </table>
+                        </div>               
+                        
+                        </div>
+                        <div id='refuse_div'>
+
+                        <div class="table-responsive">
+                            <table id="data-table-basic" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Hotel id</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>type</th>
+                                      
+                                        <th>Date-debut	</th>
+                                   
+                                        <th>Date-fin</th>
+                                        <th>Date-reservartion</th>
+                                        <th>Status</th>
+                                        <th>Modifier</th>
+                                        <th>Supprimer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                         
+                                <?php
+                                
+                                
+                                if ($publishers2) {
+                                    // show the publishers
+                                    foreach ($publishers2 as $publisher) {?>
+                                    <tr>
+                                        <td><?php  echo $publisher['id-hotel'] ?></td>
+                                        <td><?php  echo $publisher['email'] ?></td>
+                                        <td><?php  echo $publisher['phone'] ?></td>
+                                        <td><?php  echo $publisher['type'] ?></td>
+                                        <td><?php  echo $publisher['date-debut'] ?></td>
+                                        <td><?php  echo $publisher['date-fin'] ?></td>
+                                        <td><?php  echo $publisher['date-reservartion'] ?></td>
+                                        <td><?php  echo $publisher['statu'] ?></td>
+                                        <td><a href="update-resehotel.php?modi=<?php echo $publisher['id-resh'] ?>"> <i class="bi bi-pencil"></i></a></td>
+                                        <td><a href="delete-reshtl.php?id=<?php echo $publisher['id-resh'] ?>"> <i class="bi bi-trash"></i></a></td>
+                                       
+                                     </tr>
+                                    
+                               <?php }}
+                                ?>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                    
+                                    <th>Hotel id</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>type</th>
+                                      
+                                        <th>Date-debut	</th>
+                                   
+                                        <th>Date-fin</th>
+                                        <th>Date-reservartion</th>
+                                        <th>Status</th>
+                                        <th>Modifier</th>
+                                       <th>Supprimer</th>
+                                </tfoot>
+                            </table>
+                        </div>                  
+                               
+                         </div>
                 </div>
             </div>
             
@@ -257,7 +406,41 @@ $sql = 'SELECT *
         <!-- main JS
             ============================================ -->
         <script src="js/main.js"></script>
+    <script>
+        $('#refuse_div').hide();
+        $('#acceptee_div').hide();
 
+        $(document).ready(function() {
+ 
+                $('#reffuse').click(function() {
+            
+                    $('#refuse_div').show();
+                    $('#acceptee_div').hide();
+                    $('#encours_div').hide();
+        });
+        });
+
+        $(document).ready(function() {
+ 
+        $('#accepter').click(function() {
+
+            $('#refuse_div').hide();
+            $('#acceptee_div').show();
+            $('#encours_div').hide();
+        });
+        });
+
+            $(document).ready(function() {
+            
+            $('#encours').click(function() {
+
+                $('#refuse_div').hide();
+                $('#acceptee_div').hide();
+                $('#encours_div').show();
+            });
+            });
+
+    </script>
     
 </body>
 

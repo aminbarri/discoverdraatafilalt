@@ -19,13 +19,26 @@ if(isset($_POST['submit'])) {
       if(move_uploaded_file($photo_admin['tmp_name'],$target_file)){
         $statement = $pdo->prepare("INSERT INTO admin (  `nom`, `prenom`, `email`, `username`, `photoprofile`, `password`, `date-adding`) VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP)");
         $statement->execute(array($name,$sec_name,$email,$username,$target_file,md5($password)));
+        if ($statement) {
+            header("Location: afficheadmin.php?success= administrateur a été ajouté succès");
+            
+        }else{
+
+            header("Location: afficheadmin.php?error= admin info n'a pas été modifiée avec succès!");
+        }
       }
 
     }else {
       $statement = $pdo->prepare("INSERT INTO admin ( `nom`, `prenom`, `email`, `username` , `password`, `date-adding`) VALUES(?,?,?,?,?,CURRENT_TIMESTAMP)");
    
        $statement->execute(array($name,$sec_name,$email,$username,md5($password)));
+       if ($statement) {
+        header("Location: afficheadmin.php?success= administrateur a été ajouté succès");
+        
+    }else{
 
+        header("Location: afficheadmin.php?error= admin info n'a pas été modifiée avec succès!");
+    }
     }
   }
 
