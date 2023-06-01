@@ -140,7 +140,7 @@ $sql = 'SELECT *
                                         <td><?php echo $publisher['email'] ?></td>
                                         <td><?php echo $publisher['date-adding'] ?></td>
                                         <td><a href="update-admin.php?modi=<?php echo$publisher['id_admin']?>"> <i class="bi bi-pencil"></i></a></td>
-                                        <td><a href="?id=<?php echo$publisher['id_admin'] ?>"><i class="bi bi-trash"></i></a></td>
+                                        <td><a href="delete-admin.php?id=<?php echo$publisher['id_admin'] ?>"><i class="bi bi-trash"></i></a></td>
                                     </tr>
                                     
                                <?php }}

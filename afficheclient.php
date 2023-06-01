@@ -93,6 +93,18 @@ $sql = 'SELECT *
     <div class="notika-status-area">
         <div class="container">
             <div class="row">
+            <?php 
+                  if(isset($_GET['success'])){ ?>
+                    <div class="alert alert-success" role="alert">
+                      <?php echo$_GET['success']; ?>
+                    </div>
+                <?php } ?>
+                <?php 
+                  if(isset($_GET['error'])){ ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo$_GET['error']; ?>
+                    </div>
+                <?php } ?>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
@@ -123,7 +135,7 @@ $sql = 'SELECT *
                                         <td>'.$publisher['prenom'].'</td>
                                         <td>'.$publisher['email'].'</td>
                                         <td>'.$publisher['date-adding'].'</td>
-                                        <td><a href="?id='.$publisher['id_client'].'"><i class="bi bi-trash"></i></a></td>
+                                        <td><a href="delete-client.php?id='.$publisher['id_client'].'"><i class="bi bi-trash"></i></a></td>
                                     </tr>';
                                     }
                                 }
