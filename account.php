@@ -1,3 +1,12 @@
+<?php
+session_start();
+if($_SESSION['login']!= 'oui'){
+  header('Location: login.php');
+
+}
+
+?>
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -65,46 +74,7 @@
 <body>
     
     <!-- Start Header Top Area -->
-    <div class="header-top-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="logo-area">
-                        <a href="#"><img src="img/logo/logo.png" alt="" /></a>
-                    </div>
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                    <div class="header-top-menu">
-                        <ul class="nav navbar-nav notika-top-nav">
-                            <li class="nav-item dropdown">
-                        <div class="profile-image" data-toggle="modal" data-target="#profileModal">
-                    <img class="rounded-circle mb-3" src="https://th.bing.com/th/id/R.3c16772dea67b7a3b52183c0652019ec?rik=xj4uxUsY3fyeJg&pid=ImgRaw&r=0" alt="Profile Image">
-                  </div></li>
-                        </ul>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="profileModalLabel">User Profile</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <img src="https://th.bing.com/th/id/R.3c16772dea67b7a3b52183c0652019ec?rik=xj4uxUsY3fyeJg&pid=ImgRaw&r=0" alt="Profile Image" class="rounded-circle mb-3">
-                  
-                  <a href="#" class="btn btn-primary">View Profile</a>
-                  <a href="#" class="btn btn-secondary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div>
-    </div>
+    <?php include 'tophead.php' ?>
     <!-- End Header Top Area -->
     <!-- Mobile Menu start -->
     <div class="mobile-menu-area">
@@ -348,12 +318,12 @@
                 <h1>Mon Profile</h1>
 
             <div class="profile">
-              <img class="profile-image1" src="https://th.bing.com/th/id/R.3c16772dea67b7a3b52183c0652019ec?rik=xj4uxUsY3fyeJg&pid=ImgRaw&r=0" alt="Admin Profile Picture">
+              <img class="profile-image1" src="<?php echo'../admin-ver/'.$_SESSION['photoprofile']?>" alt="Admin Profile Picture">
               <div class="profile-info1">
                 <label>Name:</label>
-                <span>John Doe</span>
+                <span><?php echo$_SESSION['nom'] ?></span>
                 <label>Email:</label>
-                <span>admin@example.com</span>
+                <span><?php echo $_SESSION['email']?></span>
                 <label>Role:</label>
                 <span>Administrator</span>
               </div>

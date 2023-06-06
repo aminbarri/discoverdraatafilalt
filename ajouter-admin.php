@@ -111,7 +111,7 @@ if(isset($_POST['submit'])) {
 <body>
    <!-- Start Header Top Area -->
    <div class="header-top-area">
-    <?php include 'tophead.html' ?>
+    <?php include 'tophead.php' ?>
 </div>
     <!-- End Header Top Area -->
     <!-- Mobile Menu start -->
