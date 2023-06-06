@@ -1,6 +1,11 @@
 
 <?php
 ob_start();
+session_start();
+if($_SESSION['login']!= 'oui'){
+    header('Location: login.php');
+
+}
 include 'connection.php';
 
 
@@ -83,8 +88,8 @@ include 'connection.php';
 
 <body>
    <!-- Start Header Top Area -->
-   <div class="header-top-area">
-    <?php include 'tophead.html' ?>
+   <div class="">
+    <?php include 'tophead.php' ?>
 </div>
     <!-- End Header Top Area -->
     <!-- Mobile Menu start -->

@@ -110,9 +110,9 @@ if(isset($_POST['submit'])) {
 
 <body>
    <!-- Start Header Top Area -->
-   <div class="header-top-area">
+
     <?php include 'tophead.php' ?>
-</div>
+
     <!-- End Header Top Area -->
     <!-- Mobile Menu start -->
     <div class="mobile-menu-area">

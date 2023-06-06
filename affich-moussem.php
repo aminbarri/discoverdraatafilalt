@@ -1,5 +1,9 @@
 <?php
 include 'connection.php';
+if($_SESSION['login']!= 'oui'){
+    header('Location: login.php');
+
+}
 
 $sql = 'SELECT * 
 		FROM moussem';
@@ -76,9 +80,9 @@ $sql = 'SELECT *
 <body>
     
 <!-- Start Header Top Area -->
-<div class="header-top-area">
-    <?php include 'tophead.html' ?>
-</div>
+
+    <?php include 'tophead.php' ?>
+
     <!-- End Header Top Area -->
     <!-- Mobile Menu start -->
     <div class="mobile-menu-area">

@@ -1,4 +1,9 @@
 <?php 
+session_start();
+if($_SESSION['login']!= 'oui'){
+    header('Location: login.php');
+
+}
 include 'connection.php';
 
 if((isset($_POST['submit']))){
@@ -107,9 +112,9 @@ if((isset($_POST['submit']))){
 <body>
     
     <!-- Start Header Top Area -->
-    <div class="header-top-area">
-    <?php include 'tophead.html' ?>
-</div>
+   
+    <?php include 'tophead.php' ?>
+
     <!-- End Header Top Area -->
     <!-- Mobile Menu start -->
     <div class="mobile-menu-area">

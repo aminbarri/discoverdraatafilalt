@@ -1,4 +1,9 @@
 <?php
+session_start();
+if($_SESSION['login']!= 'oui'){
+    header('Location: login.php');
+
+}
 include 'connection.php';
 
 $sql = 'SELECT * 
@@ -77,7 +82,7 @@ $sql = 'SELECT *
     
    <!-- Start Header Top Area -->
    <div class="header-top-area">
-    <?php include 'tophead.html' ?>
+    <?php include 'tophead.php' ?>
 </div>
     <!-- End Header Top Area -->
     <!-- Mobile Menu start -->
