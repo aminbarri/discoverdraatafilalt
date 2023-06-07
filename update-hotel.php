@@ -10,8 +10,6 @@ include 'connection.php';
 
 
     ob_start();
-    include 'connection.php';
-
 
     @$id_hotel = $_GET['modi'];
 
