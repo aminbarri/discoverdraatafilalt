@@ -1,7 +1,11 @@
 
 <?php
 include 'connection.php';
+session_start();
+if($_SESSION['login']!= 'oui'){
+    header('Location: login.php');
 
+}
 if(isset($_POST['submit'])) {
   
     foreach($_POST as $key => $value){
