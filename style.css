@@ -4688,10 +4688,27 @@ body.box-layout {
     margin-left: 50px;
 }
 .ajouter-admin>form{
-    width: 697px;
+    width: 80vw;
     margin-top: 40px;
     
 }
+@media (max-width: 600px) {
+    .ajouter-admin>form{
+        margin:0 auto;
+    }
+    .ajouter-admin {
+        margin-left: 20px;
+    }
+    .container {
+        width: 100%;
+    }
+}
+@media (max-width: 767px){
+   .container {
+    width: 100%;
+} 
+}
+
 .anucon-btn{
     float: right;
 }
@@ -4733,8 +4750,14 @@ form label {
   }
   .form-row{
    display: flex;
+   flex-wrap: wrap;
   }
-
+  .col-md-12>.form{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+  }
   /*----------------------------------------*/
 /*  . Reservation hotel page
 /*----------------------------------------*/
