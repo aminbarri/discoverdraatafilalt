@@ -141,7 +141,7 @@ $sql3 = 'SELECT *
                                 <thead>
                                     <tr>
                                         <th>Hotel id</th>
-                                        <th>Email</th>
+                                        <th>Id client</th>
                                         <th>Phone</th>
                                         <th>type</th>
                                       
@@ -164,7 +164,7 @@ $sql3 = 'SELECT *
                                     foreach ($publishers as $publisher) {?>
                                     <tr>
                                         <td><?php  echo $publisher['id-hotel'] ?></td>
-                                        <td><?php  echo $publisher['email'] ?></td>
+                                        <td><?php  echo $publisher['id-client'] ?></td>
                                         <td><?php  echo $publisher['phone'] ?></td>
                                         <td><?php  echo $publisher['type'] ?></td>
                                         <td><?php  echo $publisher['date-debut'] ?></td>
@@ -183,7 +183,7 @@ $sql3 = 'SELECT *
                                     <tr>
                                     
                                     <th>Hotel id</th>
-                                        <th>Email</th>
+                                        <th>Id client</th>
                                         <th>Phone</th>
                                         <th>type</th>
                                       
@@ -204,7 +204,7 @@ $sql3 = 'SELECT *
                                 <thead>
                                     <tr>
                                         <th>Hotel id</th>
-                                        <th>Email</th>
+                                        <th>id-client</th>
                                         <th>Phone</th>
                                         <th>type</th>
                                       
@@ -227,7 +227,7 @@ $sql3 = 'SELECT *
                                     foreach ($publishers1 as $publisher) {?>
                                     <tr>
                                         <td><?php  echo $publisher['id-hotel'] ?></td>
-                                        <td><?php  echo $publisher['email'] ?></td>
+                                        <td><?php  echo $publisher['id-client'] ?></td>
                                         <td><?php  echo $publisher['phone'] ?></td>
                                         <td><?php  echo $publisher['type'] ?></td>
                                         <td><?php  echo $publisher['date-debut'] ?></td>
@@ -246,7 +246,7 @@ $sql3 = 'SELECT *
                                     <tr>
                                     
                                     <th>Hotel id</th>
-                                        <th>Email</th>
+                                        <th>id-client</th>
                                         <th>Phone</th>
                                         <th>type</th>
                                       
@@ -269,7 +269,7 @@ $sql3 = 'SELECT *
                                 <thead>
                                     <tr>
                                         <th>Hotel id</th>
-                                        <th>Email</th>
+                                        <th>id-client</th>
                                         <th>Phone</th>
                                         <th>type</th>
                                       
@@ -292,7 +292,7 @@ $sql3 = 'SELECT *
                                     foreach ($publishers2 as $publisher) {?>
                                     <tr>
                                         <td><?php  echo $publisher['id-hotel'] ?></td>
-                                        <td><?php  echo $publisher['email'] ?></td>
+                                        <td><?php  echo $publisher['id-client'] ?></td>
                                         <td><?php  echo $publisher['phone'] ?></td>
                                         <td><?php  echo $publisher['type'] ?></td>
                                         <td><?php  echo $publisher['date-debut'] ?></td>
@@ -311,7 +311,7 @@ $sql3 = 'SELECT *
                                     <tr>
                                     
                                     <th>Hotel id</th>
-                                        <th>Email</th>
+                                        <th>id-client</th>
                                         <th>Phone</th>
                                         <th>type</th>
                                       

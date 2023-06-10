@@ -17,8 +17,8 @@ include 'connection.php';
 @$id_resh = $_GET['modi'];
 
 $sql = 'SELECT *
-        FROM `reserver-hotel`
-        WHERE `id-resh` = :id_resh';
+        FROM `reserver-hotel` JOIN `client`  ON (`reserver-hotel`.`id-client` = `reserver-hotel`.`id-client`)
+        WHERE `reserver-hotel`.`id-resh` = :id_resh';
 
 $statement = $pdo->prepare($sql);
 $statement->bindValue(':id_resh', $id_resh);
@@ -272,8 +272,8 @@ if((isset($_POST['update']))){
         ${$key} = $value;
     }
       
-        $ins = $pdo->prepare("UPDATE  `reserver-hotel`  set  `email`=?, `phone`=?, `date-debut`=?, `date-fin`=? ,`statu`=? WHERE `id-resh`=$id");
-        $ins->execute(array($email,$phone,$date_debut,$date_fin,$statu));
+        $ins = $pdo->prepare("UPDATE  `reserver-hotel`  set   `phone`=?, `date-debut`=?, `date-fin`=? ,`statu`=? WHERE `reserver-hotel`.`id-resh`=$id");
+        $ins->execute(array($phone,$date_debut,$date_fin,$statu));
         if ($ins) {
             header("Location: affiche-reservehtl.php?success=Reservation a été modifiée avec succès");
            
