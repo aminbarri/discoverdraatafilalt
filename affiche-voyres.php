@@ -122,8 +122,8 @@ $sql = 'SELECT *
                                 <thead>
                                     <tr>
                                          <th>Id de voyage</th>
-                                        <th>Nom</th>
-                                        <th>Prenom</th>
+                                        <th>Id de client</th>
+                                        
                                         <th>Email</th>
                                         <th>Phone</th>
                                     
@@ -142,8 +142,8 @@ $sql = 'SELECT *
                                     foreach ($publishers as $publisher) {?>
                                     <tr>
                                     <td><?php  echo $publisher['id-cer'] ?></td>
-                                        <td><?php  echo $publisher['nom'] ?></td>
-                                        <td><?php  echo $publisher['prenom'] ?></td>
+                                        <td><?php  echo $publisher['id-cleint'] ?></td>
+                                        
                                         <td><?php  echo $publisher['email'] ?></td>
                                         <td><?php  echo $publisher['phone'] ?></td>
                                         
@@ -159,8 +159,7 @@ $sql = 'SELECT *
                                 <tfoot>
                                     <tr>
                                     <th>Id de voyage</th>
-                                    <th>Nom</th>
-                                        <th>Prenom</th>
+                                        <th>Id de client</th>
                                         <th>Email</th>
                                         <th>Phone</th>
                                     
