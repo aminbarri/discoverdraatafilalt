@@ -1,6 +1,6 @@
 <?php
 include 'connection.php';
-if($_SESSION['login']!= 'oui'){
+if($_SESSION['adminlogin']!= 'oui'){
     header('Location: login.php');
 
 }

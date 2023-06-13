@@ -2,7 +2,7 @@
 <?php
 session_start();
 include 'connection.php';
-$_SESSION['login']=  'non';
+
 $message="";
 foreach ($_POST as $key => $value) {
     ${$key} = $value;
@@ -30,7 +30,7 @@ foreach ($_POST as $key => $value) {
   
  {
       if (@$email === @$loggin[0]['email'] && @$password === @$loggin[0]['password']) {
-        $_SESSION['login'] = 'oui';
+        $_SESSION['adminlogin'] = 'oui';
         $_SESSION['nom'] =$loggin[0]['nom'];
         $_SESSION['prenom'] =$loggin[0]['prenom'];
         $_SESSION['username'] =$loggin[0]['username'];

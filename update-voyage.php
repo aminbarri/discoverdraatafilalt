@@ -2,7 +2,7 @@
 <?php
 ob_start();
 session_start();
-if($_SESSION['login']!= 'oui'){
+if($_SESSION['adminlogin']!= 'oui'){
     header('Location: login.php');
 
 }
