@@ -128,7 +128,11 @@ foreach ($_POST as $key => $value) {
         <div class="secend-signin">
               
             <div class="login_class">
-           
+            <?php if(!empty($message)){?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo $message; ?>
+                    </div>
+                    <?php }?>
                 
                 <form method='post'> 
                     <?php 
@@ -151,11 +155,7 @@ foreach ($_POST as $key => $value) {
                       <button type="submit" class="btn btn-primary"name='valider' >Sign In</button>
                     
                 </form>
-                 
-                 <?php 
-                    echo $message;
-                ?>
-
+            
             </div>
         </div>
 
