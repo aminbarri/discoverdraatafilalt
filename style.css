@@ -180,7 +180,7 @@ body {}
 	background:#00c292;
 }
 .logo-area{
-	padding:14px 0px;
+	/* padding:14px 0px; */
 }
 .profile-image>img, .modal-body>img{
     width: 50px;

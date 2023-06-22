@@ -28,11 +28,13 @@ if((isset($_POST['submit']))){
       }
 
       if(rec_img($image_h1) && rec_img($image_h2) && rec_img($image_h3)){
-        $ins = $pdo->prepare("INSERT INTO hotel (`nom`, `ville`, `carte`, `chambre`, `classe`, `location`, `img1`, `img2`, `img3`, `date-add`) VALUES (?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)");
-        $ins->execute(array($name,$ville,$carte,$chambre,$etoils,$location, $image_h1['name'], $image_h2['name'], $image_h3['name']));}
+        $ins = $pdo->prepare("INSERT INTO hotel (`prix`,`nom`, `ville`, `carte`, `chambre`, `classe`, `location`, `img1`, `img2`, `img3`, `date-add`) VALUES (?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)");
+        $ins->execute(array($prix,$name,$ville,$carte,$chambre,$etoils,$location, $image_h1['name'], $image_h2['name'], $image_h3['name']));}
+         if($ins){
+             header("Location: affiche-hotel.php?success=L'hôtel a été ajoute avec succès");
+
+         }
        
-
-
 }
 
 
@@ -165,7 +167,14 @@ if((isset($_POST['submit']))){
                             <input type="number" class="form-control" name="chambre">
                           </div>
                         </div>
-                        
+                        <div class="form-row">
+                          
+                          <div class="col-md-12">
+                            <label for="">Prix</label>
+                            <input type="number"  class="form-control" name='prix'>
+                          </div>
+                          
+                        </div>
                         <div class="form-row">
                           
                           <div class="col-md-6">

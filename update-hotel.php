@@ -156,6 +156,13 @@ include 'connection.php';
                             <input type="number" class="form-control" name="chambre" value="<?php echo $hotel[0]['chambre']; ?>">
                           </div>
                         </div>
+                        <div class="form-row">
+                          
+                          <div class="col-md-6">
+                            <label for="">Prix</label>
+                            <input type="number"  class="form-control" name='prix' value="<?php echo $hotel[0]['prix']; ?>">
+                          </div>
+                        </div>
                         
                         <div class="form-row">
                           
@@ -277,50 +284,45 @@ include 'connection.php';
 </html>
 
 <?php
-    if (isset($_POST['update'])) {
-        foreach($_POST as $key => $value){
-            ${$key} = $value;
-        }
-        $image_h1 = $_FILES['image1'];
-        $image_h2 = $_FILES['image2'];
-        $image_h3 = $_FILES['image3'];
-        function rec_img($image_dest){
-            $valid_extension = array("png","jpeg","jpg");
-            $target_file = "img/hotels/".$image_dest['name'];
-            $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);     
-            $file_extension = strtolower($file_extension);
-            if(in_array($file_extension, $valid_extension)){
-              if(move_uploaded_file($image_dest['tmp_name'],$target_file)){
+if (isset($_POST['update'])) {
+    foreach ($_POST as $key => $value) {
+        ${$key} = $value;
+    }
+    $image_h1 = $_FILES['image1'];
+    $image_h2 = $_FILES['image2'];
+    $image_h3 = $_FILES['image3'];
+
+    function rec_img($image_dest)
+    {
+        $valid_extension = array("png", "jpeg", "jpg");
+        $target_file = "img/hotels/" . $image_dest['name'];
+        $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);
+        $file_extension = strtolower($file_extension);
+        if (in_array($file_extension, $valid_extension)) {
+            if (move_uploaded_file($image_dest['tmp_name'], $target_file)) {
                 return true;
-              }
-              return false;
             }
             return false;
-          }
-          if(rec_img($image_h1) && rec_img($image_h2) && rec_img($image_h3)){
-             $ins = $pdo->prepare("UPDATE hotel SET   `nom`=?, `ville`=?, `carte`=?, `chambre`=?, `classe`=?, `location`=?, `img1`=?, `img2`=?, `img3`=?, `date-add`=CURRENT_TIMESTAMP WHERE  `id-hotel`=$id");
-             $ins->execute(array($name,$ville,$carte,$chambre,$etoils,$location, $image_h1['name'], $image_h2['name'], $image_h3['name']));
-            if ($ins) {
-                 header("Location: affiche-hotel.php?success=hotel a été modifiée avec succès");
-                
-             }else{
-
-                 header("Location: affiche-hotel.php?error=hotel n'a pas été modifiée avec succès!");
-             }
-         }else{
-
-        
-            $ins = $pdo->prepare("UPDATE hotel SET   `nom`=?, `ville`=?, `carte`=?, `chambre`=?, `classe`=?, `location`=?, `date-add`=CURRENT_TIMESTAMP WHERE  `id-hotel`=$id");
-            $ins->execute(array($name,$ville,$carte,$chambre,$etoils,$location));
-            
-            if ($ins) {
-                header("Location: affiche-hotel.php?success=hotel info a été modifiée avec succès");
-                
-            }
-            else{
-
-                header("Location: affiche-hotel.php?error= hotel info n'a pas été modifiée avec succès!");
-            }
-
+        }
+        return false;
     }
+
+    if (rec_img($image_h1) && rec_img($image_h2) && rec_img($image_h3)) {
+        $ins = $pdo->prepare("UPDATE hotel SET prix=?, `nom`=?, `ville`=?, `carte`=?, `chambre`=?, `classe`=?, `location`=?, `img1`=?, `img2`=?, `img3`=?, `date-add`=CURRENT_TIMESTAMP WHERE `id-hotel`=$id");
+        $ins->execute(array($prix, $name, $ville, $carte, $chambre, $etoils, $location, $image_h1['name'], $image_h2['name'], $image_h3['name']));
+        if ($ins) {
+            header("Location: affiche-hotel.php?success=L'hôtel a été modifié avec succès");
+        } else {
+            header("Location: affiche-hotel.php?error=L'hôtel n'a pas été modifié avec succès!");
+        }
+    } else {
+        $ins = $pdo->prepare("UPDATE hotel SET prix=?, `nom`=?, `ville`=?, `carte`=?, `chambre`=?, `classe`=?, `location`=?, `date-add`=CURRENT_TIMESTAMP WHERE `id-hotel`=$id");
+        $ins->execute(array($prix, $name, $ville, $carte, $chambre, $etoils, $location));
+        if ($ins) {
+            header("Location: affiche-hotel.php?success=Les informations de l'hôtel ont été modifiées avec succès");
+        } else {
+            header("Location: affiche-hotel.php?error=Les informations de l'hôtel n'ont pas été modifiées avec succès!");
+        }
     }
+}
+?>
