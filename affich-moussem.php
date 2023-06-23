@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'connection.php';
 if($_SESSION['adminlogin']!= 'oui'){
     header('Location: login.php');
@@ -120,14 +121,14 @@ $sql = 'SELECT *
                                 <thead>
                                     <tr>
                                         <th>Moussem</th>
-                                        <th>ville</th>
-                                        <th>date debut</th>
-                                        <th>date fin</th>
+                                        <th>Ville</th>
+                                        <th>Date debut</th>
+                                        <th>Date fin</th>
                                       
-                                        <th>dernière modification</th>
+                                        <th>Dernière modification</th>
                                    
-                                        <th>modifier</th>
-                                        <th>supprimer</th>
+                                        <th>Modifier</th>
+                                        <th>Supprimer</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -156,14 +157,14 @@ $sql = 'SELECT *
                                     <tr>
                                     
                                     <th>Moussem</th>
-                                        <th>ville</th>
-                                        <th>date debut</th>
-                                        <th>date fin</th>
+                                        <th>Ville</th>
+                                        <th>Date debut</th>
+                                        <th>Date fin</th>
                                       
-                                        <th>dernière modification</th>
+                                        <th>Dernière modification</th>
                                    
-                                        <th>modifier</th>
-                                        <th>supprimer</th>
+                                        <th>Modifier</th>
+                                        <th>Supprimer</th>
                                     </tr>
                                 </tfoot>
                             </table>
