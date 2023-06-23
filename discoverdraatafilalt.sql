@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2023 at 09:06 PM
+-- Generation Time: Jun 23, 2023 at 11:04 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -80,11 +80,13 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id_client`, `nom`, `prenom`, `email`, `password`, `date-adding`) VALUES
-(7, 'admin', 'admin', 'admin@test.com', '81dc9bdb52d04dc20036dbd8313ed055', '2023-05-26'),
+(7, 'fast', '     admin', 'admin@test.com', '81dc9bdb52d04dc20036dbd8313ed055', '2023-05-26'),
 (19, 'md', 'v', 'test@gaii.com', '81dc9bdb52d04dc20036dbd8313ed055', '2023-05-26'),
 (21, 'yyyqf', 'abnvb', 'test@hhg.com', '81dc9bdb52d04dc20036dbd8313ed055', '2023-06-02'),
 (22, 'ahsh', 'vbd', 'barrimeed@dd.com', '81dc9bdb52d04dc20036dbd8313ed055', '2023-06-10'),
-(23, 'test', 'jjk', 'kjj@jhh.com', '81dc9bdb52d04dc20036dbd8313ed055', '2023-06-10');
+(23, 'test', 'jjk', 'kjj@jhh.com', '81dc9bdb52d04dc20036dbd8313ed055', '2023-06-10'),
+(24, 'admin@test.comcv', '', '', '81dc9bdb52d04dc20036dbd8313ed055', '2023-06-13'),
+(25, 'dn', 'cc', 'vnvd.F@ed.c', 'd41d8cd98f00b204e9800998ecf8427e', '2023-06-13');
 
 -- --------------------------------------------------------
 
@@ -129,6 +131,7 @@ CREATE TABLE `hotel` (
   `chambre` int(50) NOT NULL,
   `classe` int(30) NOT NULL,
   `location` varchar(1000) NOT NULL,
+  `prix` decimal(60,0) DEFAULT 350,
   `img1` varchar(255) NOT NULL,
   `img2` varchar(255) NOT NULL,
   `img3` varchar(255) NOT NULL,
@@ -139,15 +142,14 @@ CREATE TABLE `hotel` (
 -- Dumping data for table `hotel`
 --
 
-INSERT INTO `hotel` (`id-hotel`, `nom`, `ville`, `carte`, `chambre`, `classe`, `location`, `img1`, `img2`, `img3`, `date-add`) VALUES
-(10, '2', 'dcdc', 'fjfv v', 7, 8, '5', 'School Notes Workbook .png', 'logo (1).png', 'WhatsApp Image 2023-02-07 at 21.20.53.jpg', '2023-05-24'),
-(11, '3', 'dcdc', 'fjf', 7, 8, '5', 'School Notes Workbook .png', 'logo (1).png', 'WhatsApp Image 2023-02-07 at 21.20.53.jpg', '2023-05-24'),
-(12, '4', 'dcdc', 'fjfv v', 7, 8, '5', 'School Notes Workbook .png', 'logo (1).png', 'WhatsApp Image 2023-02-07 at 21.20.53.jpg', '2023-05-24'),
-(13, '5', 'dcdc', 'fjf', 7, 8, '5', 'School Notes Workbook .png', 'logo (1).png', 'WhatsApp Image 2023-02-07 at 21.20.53.jpg', '2023-05-24'),
-(14, '6', 'dcdc', 'fjfv v', 7, 8, '5', 'School Notes Workbook .png', 'logo (1).png', 'WhatsApp Image 2023-02-07 at 21.20.53.jpg', '2023-05-24'),
-(15, '7', 'dcdc', 'fjf', 7, 8, '5', 'School Notes Workbook .png', 'logo (1).png', 'WhatsApp Image 2023-02-07 at 21.20.53.jpg', '2023-05-24'),
-(17, '9', 'dcdc', 'fjfv v', 7, 8, '5', 'School Notes Workbook .png', 'logo (1).png', 'WhatsApp Image 2023-02-07 at 21.20.53.jpg', '2023-05-24'),
-(18, 'Dar Daif', 'Ouarzazate', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3423.3073615479484!2d-6.8824570892064765!3d30.90603177439486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdbb102d99a35225%3A0x934c5438b96f5143!2zSMO0dGVsIFJpYWQgRGFyIERhw69m!5e0!3m2!1sen!2sma!4v1686490352947!5m2!1sen!2sma\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', 15, 4, 'Douar Talmasla, Ouarzazate 45000 Morocco', 'photo4jpg.jpg', 'dar-daif.jpg', 'courtyard-with-pool.jpg', '2023-06-11');
+INSERT INTO `hotel` (`id-hotel`, `nom`, `ville`, `carte`, `chambre`, `classe`, `location`, `prix`, `img1`, `img2`, `img3`, `date-add`) VALUES
+(10, '2', 'dcdc', 'fjfv v', 7, 8, '5', '350', 'School Notes Workbook .png', 'logo (1).png', 'WhatsApp Image 2023-02-07 at 21.20.53.jpg', '2023-06-22'),
+(11, '3', 'dcdc', 'fjf', 7, 8, '5', '350', 'School Notes Workbook .png', 'logo (1).png', 'WhatsApp Image 2023-02-07 at 21.20.53.jpg', '2023-05-24'),
+(12, '4', 'dcdc', 'fjfv v', 7, 8, '5', '350', 'School Notes Workbook .png', 'logo (1).png', 'WhatsApp Image 2023-02-07 at 21.20.53.jpg', '2023-05-24'),
+(14, '6', 'dcdc', 'fjfv v', 7, 8, '5', '357', 'School Notes Workbook .png', 'logo (1).png', 'WhatsApp Image 2023-02-07 at 21.20.53.jpg', '2023-05-24'),
+(15, '7', 'dcdc', 'fjf', 7, 8, '5', '350', 'School Notes Workbook .png', 'logo (1).png', 'WhatsApp Image 2023-02-07 at 21.20.53.jpg', '2023-05-24'),
+(18, 'Dar Daif', 'Ouarzazate', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3423.3073615479484!2d-6.8824570892064765!3d30.90603177439486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdbb102d99a35225%3A0x934c5438b96f5143!2zSMO0dGVsIFJpYWQgRGFyIERhw69m!5e0!3m2!1sen!2sma!4v1686490352947!5m2!1sen!2sma\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', 15, 4, 'Douar Talmasla, Ouarzazate 45000 Morocco', '350', 'photo4jpg.jpg', 'dar-daif.jpg', 'courtyard-with-pool.jpg', '2023-06-11'),
+(19, 'Sanmao Desert Luxury Camp', 'Merzouga', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3416.941688001958!2d-3.9804931891987616!3d31.083548974310144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd973bfff24ee0d5%3A0x9c5663027213191c!2sSanmao%20Desert%20Luxury%20Camp!5e0!3m2!1sen!2sma!4v1686911488177!5m2!1sen!2sma\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', 10, 5, 'Merzouga dunes, Merzouga 52450', '350', 'sanmao-desert-luxury.jpg', '6v50kxx9.png', 'kvv5svvi.png', '2023-06-16');
 
 -- --------------------------------------------------------
 
@@ -248,7 +250,9 @@ CREATE TABLE `reserver-hotel` (
 --
 
 INSERT INTO `reserver-hotel` (`id-resh`, `id-hotel`, `id-client`, `phone`, `type`, `nmbre-perssone`, `date-debut`, `date-fin`, `date-reservartion`, `statu`) VALUES
-(9, 11, 23, '12245441', 'seul', 2, '2023-06-12', '2023-06-07', '2023-06-10', 'Acceptée');
+(9, 11, 23, '12245441', 'seul', 2, '2023-06-12', '2023-06-07', '2023-06-10', 'Acceptée'),
+(10, 18, 7, '4875', 'seul', 2, '2023-07-06', '2023-06-07', '2023-06-15', 'Acceptée'),
+(11, 10, 7, '54', 'seul', 5, '2023-06-21', '2023-07-05', '2023-06-20', 'Refusée');
 
 -- --------------------------------------------------------
 
@@ -264,6 +268,14 @@ CREATE TABLE `reserver-voyage` (
   `date-reservartion` date NOT NULL,
   `id-cer` int(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reserver-voyage`
+--
+
+INSERT INTO `reserver-voyage` (`id_voya`, `id-cleint`, `email`, `phone`, `date-reservartion`, `id-cer`) VALUES
+(8, 23, 'test@dd.cin', 12345689, '2023-06-13', 7),
+(9, 7, 'cnss@ff.co', 478, '2023-06-15', 6);
 
 -- --------------------------------------------------------
 
@@ -290,7 +302,8 @@ CREATE TABLE `restau` (
 --
 
 INSERT INTO `restau` (`id-rest`, `nom`, `ville`, `province`, `description`, `location`, `img1`, `img2`, `img3`, `carte`, `date-add`) VALUES
-(3, 'test', 'test', 'test', '<p>hello hr</p>', 'nxhv', 'logo (3).png', 'Untitled design.png', 'School Notes Workbook .png', 'xmvhx', '2023-05-20');
+(3, 'test', 'dcdc', 'test', '<p>hello hr</p>', 'nxhv', 'logo (3).png', 'Untitled design.png', 'School Notes Workbook .png', 'xmvhx', '2023-05-20'),
+(5, 'test', 'dcdc', 'test', '<p>hello hr</p>', 'nxhv', 'logo (3).png', 'Untitled design.png', 'School Notes Workbook .png', 'xmvhx', '2023-06-22');
 
 -- --------------------------------------------------------
 
@@ -422,7 +435,7 @@ ALTER TABLE `chamber`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `destination`
@@ -434,7 +447,7 @@ ALTER TABLE `destination`
 -- AUTO_INCREMENT for table `hotel`
 --
 ALTER TABLE `hotel`
-  MODIFY `id-hotel` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id-hotel` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `message`
@@ -458,19 +471,19 @@ ALTER TABLE `plat`
 -- AUTO_INCREMENT for table `reserver-hotel`
 --
 ALTER TABLE `reserver-hotel`
-  MODIFY `id-resh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id-resh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `reserver-voyage`
 --
 ALTER TABLE `reserver-voyage`
-  MODIFY `id_voya` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_voya` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `restau`
 --
 ALTER TABLE `restau`
-  MODIFY `id-rest` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id-rest` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `voyage`
