@@ -34,7 +34,9 @@ if((isset($_POST['submit']))){
              header("Location: affiche-hotel.php?success=L'hôtel a été ajoute avec succès");
 
          }
-       
+       else{
+        header("Location: affiche-hotel.php?error=L'hôtel n'est pas ajoute avec succès");
+       }
 }
 
 
@@ -194,7 +196,8 @@ if((isset($_POST['submit']))){
                      
                       <div class="text-right">
                         <button type="submit" class="btn btn-primary" name='submit'>Ajouter</button>
-                        <button type="button" class="btn btn-secondary">Cancel</button>
+                        <button type="button" class="btn btn-secondary" name="cancel" onclick="window.location.href = 'index.php';">Cancel</button>
+
                       </div>
                       
                     </form>

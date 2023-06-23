@@ -32,12 +32,20 @@ if((isset($_POST['submit']))){
     $ins = $pdo->prepare("INSERT INTO destination (nom, ville, province, description,location,img1,img2,img3,date_modification) VALUES (?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)");
     $ins->execute(array($nom_rest,$ville_rest,$province,$description_rest,$loc_rest, $image_des1['name'], $image_des2['name'], $image_des3['name']));}
    
-   
+    if($ins){
+        header('Location: affiche-destination.php?succes=Destinations a été ajoute avec succès');
+    }
+    else{
+        header("Location: affiche-destination.php?error=Destinations n'est pas ajoute avec succès");
+
+    }
     // $test ="INSERT INTO  destination (nom, ville, province, description,location) VALUES
     // ('$nom_rest','$ville_rest','$province','$description_rest','$loc_rest');";
     //  mysqli_query($con,$test);
     // 
 }
+
+
 ?>
 
 
@@ -168,16 +176,20 @@ if((isset($_POST['submit']))){
                                 <input type="file" class="form-control-file" name="image3" required>
                               </div>
                             </div>
-                            <h5>Location</h5>
-                            
-                            <textarea type="text" class="html-editor" name="location"></textarea>
+                            <div class="form-group">
+                        <label for="location">Carte:</label>
+                        
+                        <input type="text" class="form-control" name="location">
+                      </div>
+                     
                             <h5>Description:</h5>
                             <textarea type='text' class="html-editor" name='description'></textarea>
                           
                           
                           <div class="text-right">
                             <button type="submit" class="btn btn-primary" name='submit'>Ajouter</button>
-                            <button type="button" class="btn btn-secondary" name='cancel'>Cancel</button>
+                            <button type="button" class="btn btn-secondary" name="cancel" onclick="window.location.href = 'index.php';">Cancel</button>
+
                           </div>
                           
                         </form>

@@ -176,7 +176,8 @@ $Voyage = $statement->fetchAll(PDO::FETCH_ASSOC);
                           <div class="text-right">
                           <input type="text" name="id" value="<?php echo$Voyage[0]['id-cer']; ?>" hidden>
                             <button type="submit" class="btn btn-primary" name='update'>Update</button>
-                            <button type="button" class="btn btn-secondary">Cancel</button>
+                            <button type="button" class="btn btn-secondary" name="cancel" onclick="window.location.href = 'index.php';">Cancel</button>
+
                           </div>
                           
                         </form>

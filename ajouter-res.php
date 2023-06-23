@@ -178,7 +178,8 @@ if((isset($_POST['submit']))){
                             <textarea class="html-editor" name='desc'></textarea>
                     <div class="text-right">
                       <button type="submit" class="btn btn-primary" name='submit'>Ajouter</button>
-                      <button type="button" class="btn btn-secondary">Cancel</button>
+                      <button type="button" class="btn btn-secondary" name="cancel" onclick="window.location.href = 'index.php';">Cancel</button>
+
                     </div>
                     
                   </form>

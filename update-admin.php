@@ -149,7 +149,8 @@ include 'connection.php';
                             <div class="anucon-btn">
                             <input type="text" name="id" value="<?php echo$admins[0]['id_admin']; ?>" hidden>
                                 <button type="submit" class="btn btn-primary" name='update'>Update</button>
-                              <button type="submit" class="btn btn-primary" name='cancel'>annuler</button>
+                                <button type="button" class="btn btn-secondary" name="cancel" onclick="window.location.href = 'index.php';">Cancel</button>
+
                             </div>
                               
                         </form>

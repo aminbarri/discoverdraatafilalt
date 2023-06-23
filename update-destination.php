@@ -157,17 +157,20 @@ $des = $statement->fetchAll(PDO::FETCH_ASSOC);
                                 <input type="file" class="form-control-file" name="image3" value="<?php echo $des[0]['img3']; ?>" >
                               </div>
                             </div>
-                            <h5>Location</h5>
-                            
-                            <textarea type="text" class="html-editor" name="location"><?php echo $des[0]['location']; ?></textarea>
-                            <h5>Description:</h5>
+                            <div class="form-group">
+                                <label for="location">Carte:</label>
+                                
+                                <input type="text" class="form-control" name="location">
+                            </div>
+                             <h5>Description:</h5>
                             <textarea type='text' class="html-editor" name='description'><?php echo $des[0]['description']; ?></textarea>
                           
                           
                           <div class="text-right">
                           <input type="text" name="id" value="<?php echo$des[0]['id-des']; ?>" hidden>
                             <button type="submit" class="btn btn-primary" name='update'>update</button>
-                            <button type="button" class="btn btn-secondary" name='cancel'>Cancel</button>
+                            <button type="button" class="btn btn-secondary" name="cancel" onclick="window.location.href = 'index.php';">Cancel</button>
+
                           </div>
                           
                         </form>

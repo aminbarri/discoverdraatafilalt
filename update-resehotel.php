@@ -166,7 +166,8 @@ $resreve = $statement->fetchAll(PDO::FETCH_ASSOC);
                         
                       <input type="text" name="id" value="<?php echo$resreve[0]['id-resh']; ?>" hidden>
                         <button type="submit" class="btn btn-primary" name='update'>update</button>
-                        <button type="button" class="btn btn-secondary">Cancel</button>
+                        <button type="button" class="btn btn-secondary" name="cancel" onclick="window.location.href = 'index.php';">Cancel</button>
+
                       </div>
                       
                     </form>

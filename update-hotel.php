@@ -185,7 +185,8 @@ include 'connection.php';
                         
                     <input type="text" name="id" value="<?php echo$hotel[0]['id-hotel']; ?>" hidden>
                         <button type="submit" class="btn btn-primary" name='update'>update</button>
-                        <button type="button" class="btn btn-secondary">Cancel</button>
+                        <button type="button" class="btn btn-secondary" name="cancel" onclick="window.location.href = 'index.php';">Cancel</button>
+
                       </div>
                       
                     </form>
