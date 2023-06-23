@@ -178,7 +178,7 @@ include 'connection.php';
                       <div class="form-group">
                         <label for="location">Carte:</label>
                         
-                        <input type="text" class="form-control" name="carte" value="<?php echo $hotel[0]['carte']; ?>">
+                        <input type="text" class="form-control" name="carte" value='<?php echo $hotel[0]['carte']; ?>'>
                       </div>
                      
                       <div class="text-right">
