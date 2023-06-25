@@ -5,7 +5,7 @@ if($_SESSION['adminlogin']!= 'oui'){
 
 }
 
- include "connection.php";
+ include "connection.php";!
 
  $sql1 = "SELECT COUNT(*) FROM client;";
  $sql2 = "SELECT COUNT(*) FROM `reserver-hotel`;";
