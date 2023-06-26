@@ -24,7 +24,16 @@ if(isset($_POST['submit'])) {
       if(move_uploaded_file($img_cover['tmp_name'],$target_file)){
         $statement = $pdo->prepare("INSERT INTO Voyage ( `ville-depart`, `ville-arrive`, `trajet`, `date-depart`, `heure-depart`, `dure`, `img`, `carte`, `prix`, `date-res`, `date-creation`) VALUES(?,?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP)");
         $statement->execute(array($ville_dpart,$ville_arrive,$trajet,$date_depart,$heure_depart,$dure,$img_cover['name'],$carte_trajet,$prix,$date_reser));
-      }
+     
+        if($statement){
+            header('Location: affiche-voyage.php?succes=Voyage a été ajoute avec succès');
+        }
+        else{
+            header("Location: affiche-voyage.php?error=Voyage n'est pas ajoute avec succès");
+    
+        }
+    
+    }
 
     }
   }

@@ -33,6 +33,15 @@ if((isset($_POST['submit']))){
       if (rec_img($image_mous1) && rec_img($image_mous2) && rec_img($image_mous3)) {
         $ins = $pdo->prepare("INSERT INTO `moussem` ( `nom`, `ville`, `description`, `location`, `date-debut`, `date-fin`, `img1`, `img2`, `img3`,`date-add`) VALUES (?, ?, ?, ?, ?,?,?,?,?, CURRENT_TIMESTAMP)");
         $ins->execute(array($nom,$ville,$desc,$location,$date_debut,$date_fin , $image_mous1['name'], $image_mous2['name'], $image_mous3['name']));
+        
+        if($ins){
+            header('Location: affich-moussem.php?succes=Moussem a été ajoute avec succès');
+        }
+        else{
+            header("Location: affich-moussem.php?error=Moussem n'est pas ajoute avec succès");
+    
+        }
+    
     }
     
 

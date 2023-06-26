@@ -30,6 +30,13 @@ if((isset($_POST['submit']))){
       if (rec_img($image_re1) && rec_img($image_re2) && rec_img($image_re3)) {
         $ins = $pdo->prepare("INSERT INTO restau (`nom`, `ville`, `province`, `description`, `location`, `img1`, `img2`, `img3`, `carte`, `date-add`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)");
         $ins->execute(array($nom, $ville, $province, $desc, $location, $image_re1['name'], $image_re2['name'], $image_re3['name'], $carte));
+        if($ins){
+            header('Location: affiche-restaurat.php?succes=Restaurant a été ajoute avec succès');
+        }
+        else{
+            header("Location: affiche-restaurat.php?error=Restaurant n'est pas ajoute avec succès");
+    
+        }
     }
     
 

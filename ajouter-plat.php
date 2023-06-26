@@ -33,7 +33,16 @@ if((isset($_POST['submit']))){
       if (rec_img($image_plat1) && rec_img($image_plat2) && rec_img($image_plat3)) {
         $ins = $pdo->prepare("INSERT INTO `plat` ( `nom`, `description`, `img1`, `img2`, `img3`,`date-add`) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)");
         $ins->execute(array($name,$desc , $image_plat1['name'], $image_plat2['name'], $image_plat3['name']));
+        if($ins){
+            header('Location: affiche-plat.php?succes=Plat a été ajoute avec succès');
+        }
+        else{
+            header("Location: affiche-plat.php?error=Plat n'est pas ajoute avec succès");
+    
+        }
+    
     }
+
     
 
 
