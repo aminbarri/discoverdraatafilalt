@@ -9,6 +9,7 @@ if($_SESSION['adminlogin']!= 'oui'){
 
  $sql1 = "SELECT COUNT(*) FROM client;";
  $sql2 = "SELECT COUNT(*) FROM `reserver-hotel`;";
+ $sql22 = "SELECT COUNT(*) FROM `reserver-voyage`;";
  $sql3 = "SELECT COUNT(*) FROM destination;";
  $sql4 = "SELECT COUNT(*) FROM restau;";
  $sql5 = "SELECT COUNT(*) FROM hotel;";
@@ -16,6 +17,8 @@ if($_SESSION['adminlogin']!= 'oui'){
 
  $statement = $pdo->query($sql1);
  $statement1 = $pdo->query($sql2);
+ $statement12 = $pdo->query($sql22);
+
  $statement2 = $pdo->query($sql3);
  $statement3 = $pdo->query($sql4);
  $statement4 = $pdo->query($sql5);
@@ -24,6 +27,8 @@ if($_SESSION['adminlogin']!= 'oui'){
  // fetch the count as an associative array
  $countClient = $statement->fetch(PDO::FETCH_ASSOC);
  $countReser = $statement1->fetch(PDO::FETCH_ASSOC);
+ $countReservoya = $statement12->fetch(PDO::FETCH_ASSOC);
+
  $countDest = $statement2->fetch(PDO::FETCH_ASSOC);
  $countRes = $statement3->fetch(PDO::FETCH_ASSOC);
  $countHotel = $statement4->fetch(PDO::FETCH_ASSOC);
@@ -125,7 +130,7 @@ if($_SESSION['adminlogin']!= 'oui'){
                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
                         <div class="website-traffic-ctn">
-                            <h2><span class="counter"><?php echo $countRes['COUNT(*)'] ?></span></h2>
+                            <h2><span class="counter"><?php echo $countReser['COUNT(*)'] +$countReservoya['COUNT(*)'] ?></span></h2>
                             <p>Reservations</p>
                         </div>
                         <div class="sparkline-bar-stats2">1,4,8,3,5,6,4,8,3,3,9,5</div>
